@@ -124,6 +124,10 @@ class Tgpc_Wc_Gift_Wrap {
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
 
+    function tgpc_is_gift_wrapper_enabled() {
+        return 'yes' === get_option( 'wc_settings_tab_tgpc_gift_wrapper_enabled' );
+    }
+
 	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
@@ -134,11 +138,12 @@ class Tgpc_Wc_Gift_Wrap {
 	private function define_admin_hooks() {
 
 		$plugin_admin = new Tgpc_Wc_Gift_Wrap_Admin( $this->get_plugin_name(), $this->get_version() );
+        $gift_box_enabled = $this->tgpc_is_gift_wrapper_enabled();
 
         $this->loader->add_filter( 'plugin_action_links', $plugin_admin, 'tgpc_wc_gift_wrap_action_links',10,2 );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 
         /* WooCommerce settings tabs */
@@ -152,10 +157,11 @@ class Tgpc_Wc_Gift_Wrap {
 
 
 		/* checkout page */
+        if ( $gift_box_enabled ) {
+            $this->loader->add_action( 'woocommerce_after_checkout_billing_form', $plugin_admin, 'tgpc_add_gift_checkbox_on_checkout', 15 );
+        }
 
-        // invoice fields validation
-        //$this->loader->add_action( 'woocommerce_checkout_process', $plugin_admin, 'dc_checkout_field_process');
-
+        $this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_admin, 'tgpc_add_gift_wrapper_fee' );
 
     }
 
@@ -168,10 +174,12 @@ class Tgpc_Wc_Gift_Wrap {
 	private function define_public_hooks() {
 
 		$plugin_public = new Tgpc_Wc_Gift_Wrap_Public( $this->get_plugin_name(), $this->get_version() );
+        $gift_box_enabled = $this->tgpc_is_gift_wrapper_enabled();
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+        if ( $gift_box_enabled ) {
+            $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+            $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+        }
 	}
 
 	/**

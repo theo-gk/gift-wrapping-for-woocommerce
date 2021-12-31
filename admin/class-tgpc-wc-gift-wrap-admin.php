@@ -54,6 +54,46 @@ class Tgpc_Wc_Gift_Wrap_Admin {
     }
 
 
+    function tgpc_add_gift_checkbox_on_checkout( $checkout ) {
+
+        woocommerce_form_field( 'tgpc_enable_checkout_gift_wrapper', [
+            'type'          => 'checkbox',
+            'label'         => esc_html__('Gift wrapper', 'tgpc-wc-gift-wrap' ),
+            'required'      => false,
+            'class'         => [ 'form-row-wide', 'update_totals_on_change' ],
+        ], '' );
+    }
+
+    function tgpc_add_gift_wrapper_fee() {
+
+        if ( is_admin() && !wp_doing_ajax() ) return;
+        if ( empty( $_POST ) ) return;
+
+        $post_data = [];
+
+        if ( isset( $_POST[ 'post_data' ] ) ) {
+            parse_str( $_POST[ 'post_data' ], $post_data );
+        }
+
+        if ( !empty( $post_data[ 'tgpc_enable_checkout_gift_wrapper' ] )
+            || !empty( $_POST[ 'tgpc_enable_checkout_gift_wrapper' ] ) ) {
+
+            $fee_cost   = (float) get_option( 'wc_settings_tab_tgpc_gift_wrapper_cost' );
+            $is_taxable = 'yes' === get_option( 'wc_settings_tab_tgpc_cost_tax_status' );
+            $tax_class  = get_option( 'wc_settings_tab_tgpc_gift_wrapper_tax_class', '' );
+
+            WC()->cart->add_fee( esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' ), $fee_cost, $is_taxable, $tax_class );
+
+        }
+    }
+
+
+
+
+
+
+
+
     /**
      * Adds an invoice icon in the admin order page if an order has invoice.
      *
