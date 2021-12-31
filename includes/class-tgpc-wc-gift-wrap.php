@@ -5,7 +5,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    Tgpc_Wc_Gift_Wrap
  * @subpackage Tgpc_Wc_Gift_Wrap/includes
@@ -17,7 +17,7 @@ class Tgpc_Wc_Gift_Wrap {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      Tgpc_Wc_Gift_Wrap_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
@@ -26,7 +26,7 @@ class Tgpc_Wc_Gift_Wrap {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
@@ -35,7 +35,7 @@ class Tgpc_Wc_Gift_Wrap {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -48,13 +48,13 @@ class Tgpc_Wc_Gift_Wrap {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function __construct() {
 		if ( defined( 'TGPC_WC_GIFT_WRAP_VERSION' ) ) {
 			$this->version = TGPC_WC_GIFT_WRAP_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '1.0';
 		}
 		$this->plugin_name = 'tgpc-wc-gift-wrap';
 
@@ -77,7 +77,7 @@ class Tgpc_Wc_Gift_Wrap {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -114,7 +114,7 @@ class Tgpc_Wc_Gift_Wrap {
 	 * Uses the Tgpc_Wc_Gift_Wrap_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -124,60 +124,68 @@ class Tgpc_Wc_Gift_Wrap {
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 	}
 
+    function tgpc_is_gift_wrapper_enabled() {
+        return 'yes' === get_option( 'wc_settings_tab_tgpc_gift_wrapper_enabled' );
+    }
+
 	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Tgpc_Wc_Gift_Wrap_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin       = new Tgpc_Wc_Gift_Wrap_Admin( $this->get_plugin_name(), $this->get_version() );
+        $gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
 
         $this->loader->add_filter( 'plugin_action_links', $plugin_admin, 'tgpc_wc_gift_wrap_action_links',10,2 );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 
         /* WooCommerce settings tabs */
         $this->loader->add_filter( 'woocommerce_get_settings_pages', $plugin_admin, 'tgpc_wc_gift_wrap_add_settings_tab', 999 );
 
 		/* Order list */
-        //add icon to orders with gift wrapper asked
-        $this->loader->add_action( 'manage_shop_order_posts_custom_column', $plugin_admin, 'dc_icon_to_order_notes_column', 15 );
+        //add icon to orders with gift wrapper selected
+        $this->loader->add_action( 'manage_shop_order_posts_custom_column', $plugin_admin, 'dc_add_gift_icon_to_order_notes_column', 15 );
 
-        /* Order edit screen */
+        /* Order data */
+        $this->loader->add_action( 'woocommerce_checkout_update_order_meta', $plugin_admin, 'tgpc_save_gift_box_option_to_order' );
 
+		/* Checkout page */
+        if ( $gift_box_enabled ) {
+            $this->loader->add_action( 'woocommerce_after_checkout_billing_form', $plugin_admin, 'tgpc_add_gift_checkbox_on_checkout', 15 );
+        }
 
-		/* checkout page */
-
-        // invoice fields validation
-        //$this->loader->add_action( 'woocommerce_checkout_process', $plugin_admin, 'dc_checkout_field_process');
-
+        $this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_admin, 'tgpc_add_gift_wrapper_fee' );
 
     }
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Tgpc_Wc_Gift_Wrap_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public      = new Tgpc_Wc_Gift_Wrap_Public( $this->get_plugin_name(), $this->get_version() );
+        $gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
+        if ( $gift_box_enabled ) {
+            $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+            $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+        }
 	}
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function run() {
 		$this->loader->run();
@@ -187,7 +195,7 @@ class Tgpc_Wc_Gift_Wrap {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
@@ -197,7 +205,7 @@ class Tgpc_Wc_Gift_Wrap {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    Tgpc_Wc_Gift_Wrap_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
@@ -207,7 +215,7 @@ class Tgpc_Wc_Gift_Wrap {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {
