@@ -66,8 +66,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
         $settings['gift_wrapper_cost'] = [
             'name' => esc_html__( 'Gift Wrapper Cost', 'tgpc-wc-gift-wrap' ),
             'type' => 'text',
-            'desc' => esc_html__( 'The gift wrapper cost.', 'tgpc-wc-gift-wrap' ),
-            'desc_tip' => esc_html__( 'The gift wrapper cost.', 'tgpc-wc-gift-wrap' ),
+            'desc' => esc_html__( 'The gift wrapper cost. If taxable, this amount is before taxes.', 'tgpc-wc-gift-wrap' ),
             'id'   => 'wc_settings_tab_tgpc_gift_wrapper_cost',
         ];
 
