@@ -13,7 +13,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -22,7 +22,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -31,7 +31,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -45,7 +45,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	/**
 	 * Adds the settings tab in the WooCommerce settings page.
      *
-     * @since 1.0.0
+     * @since 1.0
      *
 	 */
     function tgpc_wc_gift_wrap_add_settings_tab( $settings ) {
@@ -54,31 +54,94 @@ class Tgpc_Wc_Gift_Wrap_Admin {
     }
 
 
-    /**
-     * Adds an invoice icon in the admin order page if an order has invoice.
-     *
-     * @param $column
-     * @since 1.0.0
-     */
-    function dc_icon_to_order_notes_column( $column ) {
+    function tgpc_add_gift_checkbox_on_checkout( $checkout ) {
 
-        global $the_order;
+        $label_text = esc_html__('Gift wrapper', 'tgpc-wc-gift-wrap' );
+        $label_icon = '';
 
-        if ( 'order_number' === $column ) {
+        $gift_icon_url = apply_filters( 'tgpc_wc_gift_wrapper_icon', trailingslashit( TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL ) . 'assets/gift-outline.svg' );
+        $inline_style  = 'style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;"';
+
+        if ( !empty( $gift_icon_url ) ) {
+            $label_icon = '<img src="' . esc_url( $gift_icon_url ) . '" class="tgpc-gift-box-icon" ' . $inline_style . ' alt="'. esc_html__( 'Gift wrapper selected', 'tgpc-wc-gift-wrap' ).'" width="17" height="17" >';
+        }
+
+        woocommerce_form_field( 'tgpc_enable_checkout_gift_wrapper', [
+            'type'          => 'checkbox',
+            'label'         => $label_icon . $label_text,
+            'required'      => false,
+            'class'         => [ 'form-row-wide', 'update_totals_on_change' ],
+        ], '' );
+    }
+
+    function tgpc_add_gift_wrapper_fee() {
+
+        if ( is_admin() && !wp_doing_ajax() ) return;
+        if ( empty( $_POST ) ) return;
+
+        $post_data = [];
+
+        if ( isset( $_POST[ 'post_data' ] ) ) {
+            parse_str( $_POST[ 'post_data' ], $post_data );
+        }
+
+        if ( !empty( $post_data[ 'tgpc_enable_checkout_gift_wrapper' ] )
+            || !empty( $_POST[ 'tgpc_enable_checkout_gift_wrapper' ] ) ) {
+
+            $fee_cost   = (float) get_option( 'wc_settings_tab_tgpc_gift_wrapper_cost' );
+            $is_taxable = 'yes' === get_option( 'wc_settings_tab_tgpc_cost_tax_status' );
+            $tax_class  = get_option( 'wc_settings_tab_tgpc_gift_wrapper_tax_class', '' );
+
+            WC()->cart->add_fee( esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' ), $fee_cost, $is_taxable, $tax_class );
 
         }
     }
 
 
+    function tgpc_save_gift_box_option_to_order( $order_id ){
+
+        if ( !empty( $_POST['tgpc_enable_checkout_gift_wrapper'] ) ) {
+            update_post_meta( $order_id, 'tgpc_gift_wrapper_selected', 1 );
+        }
+
+    }
+
+
     /**
-     * Add Settings link in plugin page
+     * Adds a gift box icon in the admin order page if an order has gift wrapper selected.
      *
-     * @since   1.0.0
+     * @param string $column The Column ID.
+     * @since 1.0
+     */
+    function dc_add_gift_icon_to_order_notes_column( $column ) {
+
+        global $the_order;
+
+        if ( 'order_number' === $column ) {
+
+            $order_id       = $the_order->get_id();
+            $gift_selected  = get_post_meta( $order_id, 'tgpc_gift_wrapper_selected', true );
+
+            if ( $gift_selected ) {
+
+                $gift_icon_url = apply_filters( 'tgpc_wc_gift_wrapper_icon', trailingslashit( TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL ) . 'assets/gift-outline.svg' );
+                $inline_style = 'style="margin-left:4px; padding:3px; display: inline-block; vertical-align: top;"';
+
+                if ( !empty( $gift_icon_url ) ) {
+                    echo '<img src="' . esc_url( $gift_icon_url ) . '" class="tgpc-gift-box-icon-admin" ' . $inline_style . ' alt="'. esc_html__( 'Gift wrapper selected', 'tgpc-wc-gift-wrap' ).'" width="17" height="17" >';
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Add Settings link in plugin page.
      *
      * @param   array $actions
      * @param   string $plugin_file
-     *
      * @return  array $actions
+     * @since   1.0
      */
     function tgpc_wc_gift_wrap_action_links( $actions, $plugin_file ) {
 
@@ -98,7 +161,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	 * Register the stylesheets for the admin area.
 	 *
      * @param $hook
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function enqueue_styles( $hook ) {
 
@@ -114,7 +177,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
      * Register the JavaScript for the admin area.
      *
      * @param $hook
-     * @since    1.0.0
+     * @since    1.0
      */
 	public function enqueue_scripts( $hook ) {
 

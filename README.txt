@@ -1,5 +1,5 @@
 === Gift Wrapper for WooCommerce ===
-Contributors: xxx
+Contributors: pexlechris, theogk
 Tags: ecommerce, woocommerce, gift box, gift wrapper, checkout
 Requires at least: 5.3
 Tested up to: 5.8.2

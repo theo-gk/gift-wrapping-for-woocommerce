@@ -3,15 +3,15 @@
  * The plugin bootstrap file
  *
  * @link              https://www.xzy.gr/
- * @since             1.0.0
+ * @since             1.0
  * @package           Tgpc_Wc_Gift_Wrap
  *
  * @wordpress-plugin
  * Plugin Name:       Gift Wrapper for WooCommerce
  * Plugin URI:        https://www.xzy.gr/
  * Description:       Plugin description
- * Version:           2.1
- * Author:            xzy
+ * Version:           1.0
+ * Author:            pexlechris, theogk
  * Author URI:        https://www.xzy.gr/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -73,7 +73,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-tgpc-wc-gift-wrap.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    1.0
  */
 function run_tgpc_wc_gift_wrap() {
 
