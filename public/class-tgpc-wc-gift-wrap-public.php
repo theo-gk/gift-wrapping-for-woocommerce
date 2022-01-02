@@ -74,4 +74,56 @@ class Tgpc_Wc_Gift_Wrap_Public {
 
 	}
 
+	public function tgpc_add_gift_checkbox_on_checkout( $checkout ) {
+
+		$label_text = esc_html__('Gift wrapper', 'tgpc-wc-gift-wrap' );
+		$label_icon = '';
+
+		$gift_icon_url = apply_filters( 'tgpc_wc_gift_wrapper_icon', trailingslashit( TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL ) . 'assets/gift-outline.svg' );
+		$inline_style  = 'style="display: inline-block; vertical-align: text-bottom; margin-right: 4px;"';
+
+		if ( !empty( $gift_icon_url ) ) {
+			$label_icon = '<img src="' . esc_url( $gift_icon_url ) . '" class="tgpc-gift-box-icon" ' . $inline_style . ' alt="'. esc_html__( 'Gift wrapper selected', 'tgpc-wc-gift-wrap' ).'" width="17" height="17" >';
+		}
+
+		woocommerce_form_field( 'tgpc_enable_checkout_gift_wrapper', [
+			'type'          => 'checkbox',
+			'label'         => $label_icon . $label_text,
+			'required'      => false,
+			'class'         => [ 'form-row-wide', 'update_totals_on_change' ],
+		], '' );
+	}
+
+	public function tgpc_add_gift_wrapper_fee() {
+
+		if ( is_admin() && !wp_doing_ajax() ) return;
+		if ( empty( $_POST ) ) return;
+
+		$post_data = [];
+
+		if ( isset( $_POST[ 'post_data' ] ) ) {
+			parse_str( $_POST[ 'post_data' ], $post_data );
+		}
+
+		if ( !empty( $post_data[ 'tgpc_enable_checkout_gift_wrapper' ] )
+			|| !empty( $_POST[ 'tgpc_enable_checkout_gift_wrapper' ] ) ) {
+
+			$fee_cost   = (float) get_option( 'wc_settings_tab_tgpc_gift_wrapper_cost' );
+			$is_taxable = 'yes' === get_option( 'wc_settings_tab_tgpc_cost_tax_status' );
+			$tax_class  = get_option( 'wc_settings_tab_tgpc_gift_wrapper_tax_class', '' );
+
+			WC()->cart->add_fee( esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' ), $fee_cost, $is_taxable, $tax_class );
+
+		}
+	}
+
+
+	public function tgpc_save_gift_box_option_to_order( $order ){
+
+		if ( !empty( $_POST['tgpc_enable_checkout_gift_wrapper'] ) ) {
+			$order->add_meta_data( '_tgpc_gift_wrapper_selected', 'yes' );
+		}
+
+	}
+
 }

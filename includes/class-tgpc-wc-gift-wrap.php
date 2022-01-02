@@ -138,7 +138,6 @@ class Tgpc_Wc_Gift_Wrap {
 	private function define_admin_hooks() {
 
 		$plugin_admin       = new Tgpc_Wc_Gift_Wrap_Admin( $this->get_plugin_name(), $this->get_version() );
-        $gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
 
         $this->loader->add_filter( 'plugin_action_links', $plugin_admin, 'tgpc_wc_gift_wrap_action_links',10,2 );
 
@@ -153,16 +152,6 @@ class Tgpc_Wc_Gift_Wrap {
         //add icon to orders with gift wrapper selected
         $this->loader->add_action( 'manage_shop_order_posts_custom_column', $plugin_admin, 'dc_add_gift_icon_to_order_notes_column', 15 );
 
-        /* Order data */
-        $this->loader->add_action( 'woocommerce_checkout_update_order_meta', $plugin_admin, 'tgpc_save_gift_box_option_to_order' );
-
-		/* Checkout page */
-        if ( $gift_box_enabled ) {
-            $this->loader->add_action( 'woocommerce_after_checkout_billing_form', $plugin_admin, 'tgpc_add_gift_checkbox_on_checkout', 15 );
-        }
-
-        $this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_admin, 'tgpc_add_gift_wrapper_fee' );
-
     }
 
 	/**
@@ -174,12 +163,17 @@ class Tgpc_Wc_Gift_Wrap {
 	private function define_public_hooks() {
 
 		$plugin_public      = new Tgpc_Wc_Gift_Wrap_Public( $this->get_plugin_name(), $this->get_version() );
-        $gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
+		$gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
 
-        if ( $gift_box_enabled ) {
-            $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		/* Checkout page */
+ 		if ( $gift_box_enabled ) {
+			$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
             $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
-        }
+
+			$this->loader->add_action('woocommerce_after_checkout_billing_form', $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', 15);
+			$this->loader->add_action('woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee');
+			$this->loader->add_action('woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_box_option_to_order');
+		}
 	}
 
 	/**
