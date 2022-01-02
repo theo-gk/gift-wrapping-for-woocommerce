@@ -117,10 +117,11 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		}
 	}
 
-	public function tgpc_save_gift_box_option_to_order( $order_id ){
+
+	public function tgpc_save_gift_box_option_to_order( $order ){
 
 		if ( !empty( $_POST['tgpc_enable_checkout_gift_wrapper'] ) ) {
-			update_post_meta( $order_id, 'tgpc_gift_wrapper_selected', 1 );
+			$order->add_meta_data( '_tgpc_gift_wrapper_selected', 'yes' );
 		}
 
 	}

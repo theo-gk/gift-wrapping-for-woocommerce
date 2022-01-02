@@ -163,17 +163,16 @@ class Tgpc_Wc_Gift_Wrap {
 	private function define_public_hooks() {
 
 		$plugin_public      = new Tgpc_Wc_Gift_Wrap_Public( $this->get_plugin_name(), $this->get_version() );
-        $gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
+		$gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
 
 		/* Checkout page */
-        if ( $gift_box_enabled ) {
+ 		if ( $gift_box_enabled ) {
 			$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
             $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 			$this->loader->add_action('woocommerce_after_checkout_billing_form', $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', 15);
 			$this->loader->add_action('woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee');
-			$this->loader->add_action('woocommerce_checkout_update_order_meta', $plugin_public, 'tgpc_save_gift_box_option_to_order' );
-
+			$this->loader->add_action('woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_box_option_to_order');
 		}
 	}
 
