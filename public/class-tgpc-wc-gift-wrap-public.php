@@ -86,12 +86,14 @@ class Tgpc_Wc_Gift_Wrap_Public {
 			$label_icon = '<img src="' . esc_url( $gift_icon_url ) . '" class="tgpc-gift-box-icon" ' . $inline_style . ' alt="'. esc_html__( 'Gift wrapper selected', 'tgpc-wc-gift-wrap' ).'" width="17" height="17" >';
 		}
 
-		woocommerce_form_field( 'tgpc_enable_checkout_gift_wrapper', [
+        $checkbox_state = WC()->session->get( 'tgpc_gw_enabled', 0 );
+
+        woocommerce_form_field( 'tgpc_enable_checkout_gift_wrapper', [
 			'type'          => 'checkbox',
 			'label'         => $label_icon . $label_text,
 			'required'      => false,
 			'class'         => [ 'form-row-wide', 'update_totals_on_change' ],
-		], '' );
+		], $checkbox_state );
 	}
 
 	public function tgpc_add_gift_wrapper_fee() {
@@ -114,7 +116,11 @@ class Tgpc_Wc_Gift_Wrap_Public {
 
 			WC()->cart->add_fee( esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' ), $fee_cost, $is_taxable, $tax_class );
 
+            WC()->session->set( 'tgpc_gw_enabled', 1 );
 		}
+        else {
+            WC()->session->set( 'tgpc_gw_enabled', 0 );
+        }
 	}
 
 

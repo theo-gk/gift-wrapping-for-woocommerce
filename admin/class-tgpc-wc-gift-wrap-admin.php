@@ -67,13 +67,11 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 
         if ( 'order_number' === $column ) {
 
-            $order_id       = $the_order->get_id();
-
 			$gift_selected = $the_order->get_meta( '_tgpc_gift_wrapper_selected' );
 
             if ( 'yes' == $gift_selected ) {
 
-                $gift_icon_url = apply_filters( 'tgpc_wc_gift_wrapper_icon', trailingslashit( TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL ) . 'assets/gift-outline.svg' );
+                $gift_icon_url = apply_filters( 'tgpc_wc_gift_wrapper_icon_order_list', trailingslashit( TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL ) . 'assets/gift-outline.svg' );
                 $inline_style = 'style="margin-left:4px; padding:3px; display: inline-block; vertical-align: top;"';
 
                 if ( !empty( $gift_icon_url ) ) {
