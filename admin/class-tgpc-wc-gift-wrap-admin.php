@@ -54,7 +54,6 @@ class Tgpc_Wc_Gift_Wrap_Admin {
     }
 
 
-
     /**
      * Adds a gift box icon in the admin order page if an order has gift wrapper selected.
      *
@@ -115,7 +114,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
         $screen = get_current_screen();
 
         if ( ( isset( $screen->id ) && 'shop_order' === $screen->id ) || ( 'woocommerce_page_wc-settings' === $hook && isset( $_GET['tab'] ) && ( 'tgpc_wc_gift_wrap' === $_GET['tab'] ) ) ) {
-            wp_enqueue_style( 'tgpc-wc-gift-wrap-admin-css', plugin_dir_url( __FILE__ ) . 'css/tgpc-wc-gift-wrap-admin-css.css', array(), $this->version.time() );
+//            wp_enqueue_style( 'tgpc-wc-gift-wrap-admin-css', plugin_dir_url( __FILE__ ) . 'css/tgpc-wc-gift-wrap-admin-css.css', array(), $this->version.time() );
         }
 
 	}
@@ -129,7 +128,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	public function enqueue_scripts( $hook ) {
 
         if ( 'woocommerce_page_wc-settings' === $hook && isset( $_GET['tab'] ) && ( 'tgpc_wc_gift_wrap' === $_GET['tab'] ) ) {
-            wp_enqueue_script( 'tgpc-wc-gift-wrap-admin-js', TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL . 'admin/js/tgpc-wc-gift-wrap-admin-js.js', array( 'jquery' ), $this->version.time(), true );
+//            wp_enqueue_script( 'tgpc-wc-gift-wrap-admin-js', TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL . 'admin/js/tgpc-wc-gift-wrap-admin-js.js', array( 'jquery' ), $this->version.time(), true );
 		}
 	}
 }
