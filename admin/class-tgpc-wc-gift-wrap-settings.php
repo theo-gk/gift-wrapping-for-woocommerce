@@ -65,7 +65,9 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 
         $settings['gift_wrapper_cost'] = [
             'name' => esc_html__( 'Gift Wrapper Cost', 'tgpc-wc-gift-wrap' ),
-            'type' => 'text',
+            'type' => 'number',
+            'custom_attributes' => [ 'step' => '0.01', 'min' => '0' ],
+            'css'  => 'width:70px;',
             'desc' => esc_html__( 'The gift wrapper cost. If taxable, this amount is before taxes.', 'tgpc-wc-gift-wrap' ),
             'id'   => 'wc_settings_tab_tgpc_gift_wrapper_cost',
         ];
@@ -79,11 +81,23 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
         ];
 
         $settings['gift_wrapper_tax_class'] = [
-            'name'        => esc_html__( 'Cost tax class', 'tgpc-wc-gift-wrap' ),
-            'type'        => 'select',
-            'options'     => wc_get_product_tax_class_options(),
-            'desc' => esc_html__( 'Select the tax class.', 'tgpc-wc-gift-wrap' ),
-            'id'   => 'wc_settings_tab_tgpc_gift_wrapper_tax_class',
+            'name'      => esc_html__( 'Cost tax class', 'tgpc-wc-gift-wrap' ),
+            'type'      => 'select',
+            'options'   => wc_get_product_tax_class_options(),
+            'desc'      => esc_html__( 'Select the tax class.', 'tgpc-wc-gift-wrap' ),
+            'id'        => 'wc_settings_tab_tgpc_gift_wrapper_tax_class',
+        ];
+
+        $settings['gift_wrapper_location'] = [
+            'name'      => esc_html__( 'Location on Checkout', 'tgpc-wc-gift-wrap' ),
+            'type'      => 'select',
+            'default'   => 'woocommerce_after_checkout_billing_form',
+            'options'   => [
+                'woocommerce_after_checkout_billing_form' => esc_html__( 'After billing details', 'tgpc-wc-gift-wrap' ),
+                'woocommerce_review_order_before_submit'  => esc_html__( 'Before place order button', 'tgpc-wc-gift-wrap' ),
+            ],
+            'desc'      => esc_html__( 'Select the position to appear in the checkout page.', 'tgpc-wc-gift-wrap' ),
+            'id'        => 'wc_settings_tab_tgpc_gift_wrapper_location',
         ];
 
         $settings['section_end'] = [
@@ -91,7 +105,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'id'   => 'wc_settings_tab_tgpc_main_settings',
         ];
 
-		$settings = apply_filters( 'tgpc_wc_gift_wrap_general_settings', $settings );
+		$settings = apply_filters( 'tgpc_wc_gift_wrapper_general_settings', $settings );
 
 		return $settings;
 	}
