@@ -128,6 +128,10 @@ class Tgpc_Wc_Gift_Wrap {
         return 'yes' === get_option( 'wc_settings_tab_tgpc_gift_wrapper_enabled' );
     }
 
+    function tgpc_is_gift_wrapper_free() {
+        return empty( get_option( 'wc_settings_tab_tgpc_gift_wrapper_cost' ) );
+    }
+
 	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
@@ -137,21 +141,21 @@ class Tgpc_Wc_Gift_Wrap {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin       = new Tgpc_Wc_Gift_Wrap_Admin( $this->get_plugin_name(), $this->get_version() );
-
-        $this->loader->add_filter( 'plugin_action_links', $plugin_admin, 'tgpc_wc_gift_wrap_action_links',10,2 );
-
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
+		$plugin_admin = new Tgpc_Wc_Gift_Wrap_Admin( $this->get_plugin_name(), $this->get_version() );
 
         /* WooCommerce settings tabs */
         $this->loader->add_filter( 'woocommerce_get_settings_pages', $plugin_admin, 'tgpc_wc_gift_wrap_add_settings_tab', 999 );
+        //$this->loader->add_filter( 'woocommerce_admin_settings_sanitize_option_wc_settings_tab_tgpc_gift_wrapper_cost', $plugin_admin, 'tgpc_wc_gift_wrap_sanitize_cost', 10, 3 );
 
 		/* Order list */
         //add icon to orders with gift wrapper selected
         $this->loader->add_action( 'manage_shop_order_posts_custom_column', $plugin_admin, 'dc_add_gift_icon_to_order_notes_column', 15 );
 
+        /* Plugins list */
+        $this->loader->add_filter( 'plugin_action_links', $plugin_admin, 'tgpc_wc_gift_wrap_action_links',10,2 );
+
+//        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+//        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
     }
 
 	/**
@@ -162,17 +166,24 @@ class Tgpc_Wc_Gift_Wrap {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public      = new Tgpc_Wc_Gift_Wrap_Public( $this->get_plugin_name(), $this->get_version() );
-		$gift_box_enabled   = $this->tgpc_is_gift_wrapper_enabled();
+		$plugin_public        = new Tgpc_Wc_Gift_Wrap_Public( $this->get_plugin_name(), $this->get_version() );
+		$gift_wrapper_enabled = $this->tgpc_is_gift_wrapper_enabled();
 
 		/* Checkout page */
- 		if ( $gift_box_enabled ) {
-			$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-            $this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+ 		if ( $gift_wrapper_enabled ) {
 
-			$this->loader->add_action('woocommerce_after_checkout_billing_form', $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', 15);
-			$this->loader->add_action('woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee');
-			$this->loader->add_action('woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_box_option_to_order');
+            $checkbox_location = get_option( 'wc_settings_tab_tgpc_gift_wrapper_location', 'woocommerce_after_checkout_billing_form' );
+
+            $this->loader->add_action( $checkbox_location, $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', 15 );
+            $this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee' );
+            $this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_wrapper_option_to_order' );
+
+            if ( $this->tgpc_is_gift_wrapper_free() ) {
+                add_filter( 'woocommerce_get_order_item_totals_excl_free_fees', '__return_false' );
+            }
+
+//            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+//            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		}
 	}
 
