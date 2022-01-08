@@ -125,11 +125,11 @@ class Tgpc_Wc_Gift_Wrap {
 	}
 
     function tgpc_is_gift_wrapper_enabled() {
-        return 'yes' === get_option( 'wc_settings_tab_tgpc_gift_wrapper_enabled' );
+        return 'yes' === get_option( 'tgpc_gift_wrapper_enabled' );
     }
 
     function tgpc_is_gift_wrapper_free() {
-        return empty( get_option( 'wc_settings_tab_tgpc_gift_wrapper_cost' ) );
+        return empty( get_option( 'tgpc_gift_wrapper_cost' ) );
     }
 
 	/**
@@ -145,7 +145,7 @@ class Tgpc_Wc_Gift_Wrap {
 
         /* WooCommerce settings tabs */
         $this->loader->add_filter( 'woocommerce_get_settings_pages', $plugin_admin, 'tgpc_wc_gift_wrap_add_settings_tab', 999 );
-        //$this->loader->add_filter( 'woocommerce_admin_settings_sanitize_option_wc_settings_tab_tgpc_gift_wrapper_cost', $plugin_admin, 'tgpc_wc_gift_wrap_sanitize_cost', 10, 3 );
+        //$this->loader->add_filter( 'woocommerce_admin_settings_sanitize_option_tgpc_gift_wrapper_cost', $plugin_admin, 'tgpc_wc_gift_wrap_sanitize_cost', 10, 3 );
 
 		/* Order list */
         //add icon to orders with gift wrapper selected
@@ -172,9 +172,22 @@ class Tgpc_Wc_Gift_Wrap {
 		/* Checkout page */
  		if ( $gift_wrapper_enabled ) {
 
-            $checkbox_location = get_option( 'wc_settings_tab_tgpc_gift_wrapper_location', 'woocommerce_after_checkout_billing_form' );
+            $checkbox_location = get_option( 'tgpc_gift_wrapper_location', 'woocommerce_after_checkout_billing_form' );
 
-            $this->loader->add_action( $checkbox_location, $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', 15 );
+			/**
+			 * Location hook priority filter.
+			 *
+			 * The gift wrapper is printed by the hook $checkbox_location and default priority 15.
+			 * If you need to alter the hook and the priority hook by code, you need to use filter
+			 * pre_option_tgpc_gift_wrapper_location & tgpc_gift_wrapper_location_hook_priority filters.
+			 *
+			 * @since 1.0
+			 *
+			 * @param int $priority Default is 15.
+			 */
+			$checkbox_location_hook_priority = apply_filters('tgpc_gift_wrapper_checkout_checkbox_location_hook_priority', 15);
+
+            $this->loader->add_action( $checkbox_location, $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', $checkbox_location_hook_priority );
             $this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee' );
             $this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_wrapper_option_to_order' );
 
