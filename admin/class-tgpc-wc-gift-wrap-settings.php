@@ -72,6 +72,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'id'   => 'wc_settings_tab_tgpc_gift_wrapper_cost',
         ];
 
+		//TODO
         $settings['cost_tax_status'] = [
             'name' => esc_html__( 'Cost tax status','tgpc-wc-gift-wrap' ),
             'type' => 'checkbox',
@@ -88,13 +89,22 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'id'        => 'wc_settings_tab_tgpc_gift_wrapper_tax_class',
         ];
 
+		// Doc: https://www.businessbloomer.com/woocommerce-visual-hook-guide-checkout-page/
         $settings['gift_wrapper_location'] = [
             'name'      => esc_html__( 'Location on Checkout', 'tgpc-wc-gift-wrap' ),
             'type'      => 'select',
             'default'   => 'woocommerce_after_checkout_billing_form',
             'options'   => [
+				'woocommerce_checkout_before_customer_details'  => esc_html__( 'Before customer details', 'tgpc-wc-gift-wrap' ),
+
+				'woocommerce_before_checkout_billing_form'  => esc_html__( 'Before billing details', 'tgpc-wc-gift-wrap' ),
                 'woocommerce_after_checkout_billing_form' => esc_html__( 'After billing details', 'tgpc-wc-gift-wrap' ),
-                'woocommerce_review_order_before_submit'  => esc_html__( 'Before place order button', 'tgpc-wc-gift-wrap' ),
+
+				'woocommerce_before_order_notes'  => esc_html__( 'Before order notes', 'tgpc-wc-gift-wrap' ),
+				'woocommerce_after_order_notes'  => esc_html__( 'After order notes', 'tgpc-wc-gift-wrap' ),
+
+				'woocommerce_review_order_before_payment'  => esc_html__( 'Before payments', 'tgpc-wc-gift-wrap' ),
+				'woocommerce_review_order_before_submit'  => esc_html__( 'Before place order button', 'tgpc-wc-gift-wrap' ),
             ],
             'desc'      => esc_html__( 'Select the position to appear in the checkout page.', 'tgpc-wc-gift-wrap' ),
             'id'        => 'wc_settings_tab_tgpc_gift_wrapper_location',
