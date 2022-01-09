@@ -43,37 +43,12 @@ class Tgpc_Wc_Gift_Wrap_Public {
 
 	}
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0
-	 */
-	public function enqueue_styles() {
-
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tgpc-wc-gift-wrap-public.css', array(), $this->version .time() );
-
-	}
-
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0
-	 */
-	public function enqueue_scripts() {
-
-        if ( is_checkout() ) {
-
-            $script_data = [
-                'xzy' => '',
-            ];
-
-            wp_register_script( 'tgpc-wc-gift-wrap-checkout', plugin_dir_url(__FILE__) . 'js/tgpc-wc-gift-wrap-public.js', array('jquery'), $this->version . time(), true );
-            wp_localize_script( 'tgpc-wc-gift-wrap-checkout', 'script_data', $script_data );
-            wp_enqueue_script( 'tgpc-wc-gift-wrap-checkout' );
-        }
-
-	}
-
+    /**
+     * Add gift wrapper checkbox input on checkout page.
+     *
+     * @param $checkout WC_Checkout
+     * @since    1.0
+     */
 	public function tgpc_add_gift_checkbox_on_checkout( $checkout ) {
 
 		$inline_style  = 'display: inline-block; vertical-align: text-bottom; margin-right: 4px;';
@@ -117,9 +92,9 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		 * @param string $height The height of the html tag, svg or img.
 		 * @param string $inline_style The inline style of the icon.
 		 */
-		$label_icon = apply_filters( 'tgpc_wc_gift_wrapper_icon_html', $label_icon, $img_class, $width, $height, $inline_style);
+		$label_icon = apply_filters( 'tgpc_wc_gift_wrapper_icon_html', $label_icon, $img_class, $width, $height, $inline_style );
 
-		$label_text = esc_html__('Gift wrapper', 'tgpc-wc-gift-wrap' );
+		$label_text = esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' );
 
 		$label = $label_icon . '<span class="tgpc-enable-checkout-gift-wrapper--label_text">' . $label_text . '</span>';
 
@@ -133,7 +108,7 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		 * @param string $label The input label as html.
 		 * @param string $label_text The escaped text of the label.
 		 */
-		$label = apply_filters('tgpc_wc_gift_wrapper_checkout_label', $label, $label_icon, $label_text);
+		$label = apply_filters( 'tgpc_wc_gift_wrapper_checkout_label', $label, $label_icon, $label_text );
 
 		$checkbox_state = WC()->session->get( 'tgpc_gw_enabled', 0 );
 
@@ -145,6 +120,12 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		], $checkbox_state );
 	}
 
+    /**
+     * Add the fee to cart totals.
+     * Also saves checkbox value to session.
+     *
+     * @since 1.0
+     */
 	public function tgpc_add_gift_wrapper_fee() {
 
 		if ( is_admin() && !wp_doing_ajax() ) return;
@@ -172,13 +153,49 @@ class Tgpc_Wc_Gift_Wrap_Public {
         }
 	}
 
-
+    /**
+     * Save checkbox value to order data.
+     *
+     * @param $order WC_Order
+     * @since 1.0
+     */
 	public function tgpc_save_gift_box_option_to_order( $order ){
 
 		if ( !empty( $_POST['tgpc_enable_checkout_gift_wrapper'] ) ) {
 			$order->add_meta_data( '_tgpc_gift_wrapper_selected', 'yes' );
 		}
-
 	}
+
+
+    /**
+     * Register the stylesheets for the public-facing side of the site.
+     *
+     * @since    1.0
+     */
+    public function enqueue_styles() {
+
+//		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tgpc-wc-gift-wrap-public.css', array(), $this->version .time() );
+
+    }
+
+    /**
+     * Register the JavaScript for the public-facing side of the site.
+     *
+     * @since    1.0
+     */
+    public function enqueue_scripts() {
+
+//        if ( is_checkout() ) {
+//
+//            $script_data = [
+//                'xzy' => '',
+//            ];
+//
+//            wp_register_script( 'tgpc-wc-gift-wrap-checkout', plugin_dir_url(__FILE__) . 'js/tgpc-wc-gift-wrap-public.js', array('jquery'), $this->version . time(), true );
+//            wp_localize_script( 'tgpc-wc-gift-wrap-checkout', 'script_data', $script_data );
+//            wp_enqueue_script( 'tgpc-wc-gift-wrap-checkout' );
+//        }
+
+    }
 
 }
