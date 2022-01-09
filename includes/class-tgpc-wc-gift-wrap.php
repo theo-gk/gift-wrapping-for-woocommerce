@@ -145,7 +145,6 @@ class Tgpc_Wc_Gift_Wrap {
 
         /* WooCommerce settings tabs */
         $this->loader->add_filter( 'woocommerce_get_settings_pages', $plugin_admin, 'tgpc_wc_gift_wrap_add_settings_tab', 999 );
-        //$this->loader->add_filter( 'woocommerce_admin_settings_sanitize_option_tgpc_gift_wrapper_cost', $plugin_admin, 'tgpc_wc_gift_wrap_sanitize_cost', 10, 3 );
 
 		/* Order list */
         //add icon to orders with gift wrapper selected
