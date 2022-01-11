@@ -52,7 +52,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'name' => esc_html__( 'Gift Wrapper Settings', 'tgpc-wc-gift-wrap' ),
             'type' => 'title',
             'desc' => '',
-            'id'   => 'tgpc_main_settings',
+            'id'   => 'tgpc_gift_wrapper_main_settings',
         ];
 
         $settings['gift_wrapper_enabled'] = [
@@ -64,7 +64,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
         ];
 
         $settings['gift_wrapper_cost'] = [
-            'name' => esc_html__( 'Gift Wrapper Cost', 'tgpc-wc-gift-wrap' ),
+            'name' => esc_html__( 'Cost', 'tgpc-wc-gift-wrap' ),
             'type' => 'number',
             'custom_attributes' => [ 'step' => '0.01', 'min' => '0' ],
             'css'  => 'width:70px;',
@@ -72,20 +72,19 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'id'   => 'tgpc_gift_wrapper_cost',
         ];
 
-		//TODO
-        $settings['cost_tax_status'] = [
+        $settings['gift_wrapper_cost_tax_status'] = [
             'name' => esc_html__( 'Cost tax status','tgpc-wc-gift-wrap' ),
             'type' => 'checkbox',
             'desc' => esc_html__( 'Cost is taxable', 'tgpc-wc-gift-wrap' ),
             'desc_tip' => esc_html__( 'Check if the gift wrapper cost is taxable.', 'tgpc-wc-gift-wrap' ),
-            'id'   => 'tgpc_cost_tax_status',
+            'id'   => 'tgpc_gift_wrapper_cost_tax_status',
         ];
 
         $settings['gift_wrapper_tax_class'] = [
             'name'      => esc_html__( 'Cost tax class', 'tgpc-wc-gift-wrap' ),
             'type'      => 'select',
             'options'   => wc_get_product_tax_class_options(),
-            'desc'      => esc_html__( 'Select the tax class.', 'tgpc-wc-gift-wrap' ),
+            'desc'      => esc_html__( 'Select the tax class for gift wrapper cost, if cost is taxable.', 'tgpc-wc-gift-wrap' ),
             'id'        => 'tgpc_gift_wrapper_tax_class',
         ];
 
@@ -112,10 +111,10 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 
         $settings['section_end'] = [
             'type' => 'sectionend',
-            'id'   => 'tgpc_main_settings',
+            'id'   => 'tgpc_gift_wrapper_main_settings',
         ];
 
-		$settings = apply_filters( 'tgpc_wc_gift_wrapper_general_settings', $settings );
+		$settings = apply_filters( 'tgpc_wc_gift_wrapper_main_settings', $settings );
 
 		return $settings;
 	}

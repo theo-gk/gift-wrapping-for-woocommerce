@@ -173,21 +173,22 @@ class Tgpc_Wc_Gift_Wrap {
 
             $checkbox_location = get_option( 'tgpc_gift_wrapper_location', 'woocommerce_after_checkout_billing_form' );
 
-			/**
-			 * Location hook priority filter.
-			 *
-			 * The gift wrapper is printed by the hook $checkbox_location and default priority 15.
-			 * If you need to alter the hook and the priority hook by code, you need to use filter
-			 * pre_option_tgpc_gift_wrapper_location & tgpc_gift_wrapper_location_hook_priority filters.
-			 *
-			 * @since 1.0
-			 *
-			 * @param int $priority Default is 15.
-			 */
-			$checkbox_location_hook_priority = apply_filters('tgpc_gift_wrapper_checkout_checkbox_location_hook_priority', 15);
+			if( defined('TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY') ){
+				$checkbox_location_hook_priority = TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY;
+			}else{
+				$checkbox_location_hook_priority = 15;
+			}
 
+			/**
+			 * If you need to alter the hook and/or the priority hook by code, you need to use filter
+			 * pre_option_tgpc_gift_wrapper_location & to define the integer constant
+			 * TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY in the wp-config.php
+			 *
+			 * Ex: define( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY', 12 );
+			 */
             $this->loader->add_action( $checkbox_location, $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', $checkbox_location_hook_priority );
-            $this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee' );
+
+			$this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee' );
             $this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_wrapper_option_to_order' );
 
             if ( $this->tgpc_is_gift_wrapper_free() ) {

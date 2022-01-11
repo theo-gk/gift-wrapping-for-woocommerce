@@ -1,27 +1,20 @@
 <?php
 /**
- * The plugin bootstrap file
- *
- * @link              https://www.xzy.gr/
- * @since             1.0
- * @package           Tgpc_Wc_Gift_Wrap
- *
- * @wordpress-plugin
  * Plugin Name:       Gift Wrapper for WooCommerce
- * Plugin URI:        https://www.xzy.gr/
  * Description:       Plugin description
  * Version:           1.0
- * Author:            pexlechris, theogk
- * Author URI:        https://www.xzy.gr/
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Stable tag:        1.0
+ * Author:             Pexle Chris, Theo Gkitsos
  * Text Domain:       tgpc-wc-gift-wrap
  * Domain Path:       /languages
+ *
  * Requires at least: 5.3
  * Tested up to:      5.8.2
- * Stable tag:        1.0
  * WC requires at least: 4.6.0
  * WC tested up to:   6.0.0
+ *
+ * License:           GPLv2 or later
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
  */
 
 // If this file is called directly, abort.
@@ -81,4 +74,13 @@ function run_tgpc_wc_gift_wrap() {
 	$plugin->run();
 
 }
-run_tgpc_wc_gift_wrap();
+
+
+/**
+ * If WooCommerce is inactive, this plugin is not executed.
+ */
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	run_tgpc_wc_gift_wrap();
+}
+
+
