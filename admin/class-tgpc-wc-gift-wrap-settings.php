@@ -37,7 +37,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 	 */
 	protected function get_own_sections() {
 		return array(
-			''                => __( 'General Settings', 'tgpc-wc-gift-wrap' ),
+			'' => __( 'General Settings', 'tgpc-wc-gift-wrap' ),
 		);
 	}
 
@@ -68,7 +68,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'type' => 'number',
             'custom_attributes' => [ 'step' => '0.01', 'min' => '0' ],
             'css'  => 'width:70px;',
-            'desc' => esc_html__( 'The gift wrapper cost. If taxable, this amount is before taxes.', 'tgpc-wc-gift-wrap' ),
+            'desc' => esc_html__( 'The gift wrapper cost (0 for free gift wrapper). If taxable, this amount is before taxes.', 'tgpc-wc-gift-wrap' ),
             'id'   => 'tgpc_gift_wrapper_cost',
         ];
 
@@ -114,6 +114,13 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'id'   => 'tgpc_gift_wrapper_main_settings',
         ];
 
+		/**
+		 * Plugin settings filter.
+		 *
+		 * @since 1.0
+		 *
+		 * @param array $settings The plugin's main settings.
+		 */
 		$settings = apply_filters( 'tgpc_wc_gift_wrapper_main_settings', $settings );
 
 		return $settings;
