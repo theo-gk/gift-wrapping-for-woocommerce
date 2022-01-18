@@ -37,7 +37,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 	 */
 	protected function get_own_sections() {
 		return array(
-			''                => __( 'General Settings', 'tgpc-wc-gift-wrap' ),
+			'' => __( 'General Settings', 'tgpc-wc-gift-wrap' ),
 		);
 	}
 
@@ -88,7 +88,6 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'id'        => 'tgpc_gift_wrapper_tax_class',
         ];
 
-		// Doc: https://www.businessbloomer.com/woocommerce-visual-hook-guide-checkout-page/
         $settings['gift_wrapper_location'] = [
             'name'      => esc_html__( 'Location on Checkout', 'tgpc-wc-gift-wrap' ),
             'type'      => 'select',
