@@ -172,12 +172,12 @@ class Tgpc_Wc_Gift_Wrap_Public {
      *
      * @param object $order WC_Order
      */
-	public function tgpc_save_gift_wrapper_option_to_order_meta( $order ){
+	public function tgpc_save_gift_wrapper_option_to_order_meta( $order ) {
 
 		if ( !empty( $_POST['tgpc_enable_checkout_gift_wrapper'] ) ) {
-			$cost = WC()->session->get( 'tgpc_gw_cost');
-			$name = WC()->session->get( 'tgpc_gw_name');
-			$order->add_meta_data( '_tgpc_gift_wrapper', array('cost' => $cost, 'name' =>  $name) );
+			$cost = WC()->session->get( 'tgpc_gw_cost' );
+			$name = WC()->session->get( 'tgpc_gw_name' );
+			$order->add_meta_data( '_tgpc_gift_wrapper', [ 'cost' => $cost, 'name' =>  $name ] );
 		}
 	}
 
@@ -195,24 +195,26 @@ class Tgpc_Wc_Gift_Wrap_Public {
 	 * @param array $types
 	 * @return array The fees variable that isn't changed.
 	 */
-	public function tgpc_show_fee_even_if_gift_wrapper_cost_is_0($fees, $order, $types) {
+	public function tgpc_show_fee_even_if_gift_wrapper_cost_is_0( $fees, $order, $types ) {
+
 		if ( in_array('fee', $types ) ) {
-			$tgpc_gift_wrapper = $order->get_meta('_tgpc_gift_wrapper');
+			$tgpc_gift_wrapper = $order->get_meta( '_tgpc_gift_wrapper' );
 			$saved_cost = $tgpc_gift_wrapper['cost'];
 			$saved_name = $tgpc_gift_wrapper['name'];
 
-			foreach($fees as $fee_id => $fee){
-				if( 0 == $saved_cost && $saved_name == $fee->get_name() ){
-					add_filter( 'woocommerce_get_order_item_totals_excl_free_fees', function($bool, $id) use($fee_id){
-						if( $id == $fee_id ){
-							$bool = false;
-						}
-						return $bool;
-					}, 10, 2);
-					break;
-				}
-			}
-
+            if ( 0 == $saved_cost ) {
+                foreach ( $fees as $fee_id => $fee ) {
+                    if ( $saved_name == $fee->get_name() ) {
+                        add_filter( 'woocommerce_get_order_item_totals_excl_free_fees', function( $bool, $id ) use( $fee_id ) {
+                            if( $id == $fee_id ) {
+                                $bool = false;
+                            }
+                            return $bool;
+                        }, 10, 2 );
+                        break;
+                    }
+                }
+            }
 		}
 		return $fees;
 	}
