@@ -128,10 +128,6 @@ class Tgpc_Wc_Gift_Wrap {
         return 'yes' === get_option( 'tgpc_gift_wrapper_enabled' );
     }
 
-    function tgpc_is_gift_wrapper_free() {
-        return empty( get_option( 'tgpc_gift_wrapper_cost' ) );
-    }
-
 	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
@@ -189,11 +185,11 @@ class Tgpc_Wc_Gift_Wrap {
             $this->loader->add_action( $checkbox_location, $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', $checkbox_location_hook_priority );
 
 			$this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee' );
-            $this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_wrapper_option_to_order' );
+			$this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_wrapper_option_to_order_meta' );
 
-            if ( $this->tgpc_is_gift_wrapper_free() ) {
-                add_filter( 'woocommerce_get_order_item_totals_excl_free_fees', '__return_false' );
-            }
+			$this->loader->add_action( 'woocommerce_order_get_items', $plugin_public, 'tgpc_show_fee_even_if_gift_wrapper_cost_is_0', 10, 3 );
+
+            add_filter( 'woocommerce_get_order_item_totals_excl_free_fees', '__return_false' );
 
 //            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 //            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
