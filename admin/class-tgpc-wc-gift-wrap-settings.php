@@ -49,16 +49,16 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 	protected function get_settings_for_default_section() {
 
         $settings['section_title'] = [
-            'name' => esc_html__( 'Gift Wrapper Settings', 'tgpc-wc-gift-wrap' ),
+            'name' => esc_html__( 'Gift wrapper settings', 'tgpc-wc-gift-wrap' ),
             'type' => 'title',
             'desc' => '',
             'id'   => 'tgpc_gift_wrapper_main_settings',
         ];
 
         $settings['gift_wrapper_enabled'] = [
-            'name' => esc_html__( 'Enable Gift Wrapper','tgpc-wc-gift-wrap' ),
+            'name' => esc_html__( 'Enable gift wrapper','tgpc-wc-gift-wrap' ),
             'type' => 'checkbox',
-            'desc' => esc_html__( 'Enable Gift Wrapper', 'tgpc-wc-gift-wrap' ),
+            'desc' => esc_html__( 'Enable gift wrapper', 'tgpc-wc-gift-wrap' ),
             'desc_tip' => esc_html__( 'Enable gift wrapper option on the checkout page.', 'tgpc-wc-gift-wrap' ),
             'id'   => 'tgpc_gift_wrapper_enabled',
         ];
@@ -68,7 +68,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'type' => 'number',
             'custom_attributes' => [ 'step' => '0.01', 'min' => '0' ],
             'css'  => 'width:70px;',
-            'desc' => esc_html__( 'The gift wrapper cost (0 for free gift wrapper). If taxable, this amount is before taxes.', 'tgpc-wc-gift-wrap' ),
+            'desc' => esc_html__( 'The gift wrapper cost. If taxable, this amount is before taxes. Set number to zero (0) for free gift wrapper.', 'tgpc-wc-gift-wrap' ),
             'id'   => 'tgpc_gift_wrapper_cost',
         ];
 
@@ -88,9 +88,8 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
             'id'        => 'tgpc_gift_wrapper_tax_class',
         ];
 
-		// Doc: https://www.businessbloomer.com/woocommerce-visual-hook-guide-checkout-page/
         $settings['gift_wrapper_location'] = [
-            'name'      => esc_html__( 'Location on Checkout', 'tgpc-wc-gift-wrap' ),
+            'name'      => esc_html__( 'Location on checkout', 'tgpc-wc-gift-wrap' ),
             'type'      => 'select',
             'default'   => 'woocommerce_after_checkout_billing_form',
             'options'   => [
