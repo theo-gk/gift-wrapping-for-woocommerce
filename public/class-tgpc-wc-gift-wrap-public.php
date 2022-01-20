@@ -151,7 +151,7 @@ class Tgpc_Wc_Gift_Wrap_Public {
 			|| !empty( $_POST[ 'tgpc_enable_checkout_gift_wrapper' ] ) ) {
 
 			$fee_name = esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' );
-			$fee_cost   = (float) get_option( 'tgpc_gift_wrapper_cost' );
+			$fee_cost   = (float) get_option( 'tgpc_gift_wrapper_cost', 0 );
 			$is_taxable = 'yes' === get_option( 'tgpc_gift_wrapper_cost_tax_status' );
 			$tax_class  = get_option( 'tgpc_gift_wrapper_tax_class', '' );
 
