@@ -23,7 +23,7 @@ Through simple and straight-forwawrd settings, you can set a cost for the gift w
 
 = Full features list (free version) =
 
-- Customers can select a gift wrapper for their order throught a checkout field on the checkout page.
+- Customers can select a gift wrapper for their order through a checkout field on the checkout page.
 - Set an extra cost if gift wrapper is selected. Of course, you can also offer it for free if you want.
 - Select if the extra cost is taxable and select its tax rate.
 - If selected, an extra fee appears on the checkout totals table, adding the gift wrapper cost to the cart total. The fee also appears on the thank you page and the admin and customer emails.
@@ -34,26 +34,52 @@ Through simple and straight-forwawrd settings, you can set a cost for the gift w
 
 == Screenshots ==
 
-1. Screenshot-1 caption
-2. Screenshot-2 caption
+1. Plugin settings.
+2. Checkout gift wrapper input.
 
 == Frequently Asked Questions ==
 
-= Can I add a cost to gift wrapper? =
+ = Can I add a cost to gift wrapper? =
+ Yes, you can add a cost easily through the plugin settings.
 
-Yes, you can add a cost easily throught the plugin settings.
+ = Can I offer gift wrapper for free? =
+ Yes, just set the gift wrapper cost to zero (0).
 
-= Can I offer gift wrapper for free? =
+ = Is there any hook that allow me to change the cost on the fly? =
+ Yes, you can do this, using the Options API.
+ `
+ add_filter('pre_option_tgpc_gift_wrapper_cost', function($cost){
+    //Do magic here
+    return $cost;
+ });
+ `
 
-Yes, just set the gift wrapper cost to zero (0).
+ = Can I change the icon? =
+ Yes, you can use the filter `tgpc_wc_gift_wrapper_icon_url` in order to return the public url of the image yu want OR
+ the filter `tgpc_wc_gift_wrapper_icon_html` in order to filter the printed html of the icon.
 
-= Can I change gift wrapper checkbox position? =
+ = How can I hide the gift wrapper icon? =
+ You can do this easily with the following php snippet:
+ `
+ add_filter('tgpc_wc_gift_wrapper_icon_html', function($icon_html){
+    return '';
+ });
+ `
 
-Yes, you can choose between several checkout page locations throught the plugin settings.
+ = Can I change gift wrapper checkbox position? =
+ Yes, you can choose between several checkout page locations through the plugin settings.
+ If you want to use some other hook, read below.
 
-= Can I apply my own styling to the gift wrapper checkbox? =
+ = Can I set different gift wrapper checkbox position, instead of these in dropdown in the plugin settings? =
+ Yes, you need to set the hook that printing the input. And maybe the hook location.
+ - To change the hook add this line to your wp-config.php:
+ `define( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME', 'new_hook_name' );`
+ - To change the hook's priority (default is 15):
+ you will need to add a constant in your wp-config.php:
+ `define( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY', 12 );`
 
-Yes, you can write your own CSS to style it as you like. There are appropriate classes in all the right places, so you can apply your CSS wherever you need to.
+ = Can I apply my own styling to the gift wrapper checkbox? =
+ Yes, you can write your own CSS to style it as you like. There are appropriate classes in all the right places, so you can apply your CSS wherever you need to.
 
 == Installation ==
 
