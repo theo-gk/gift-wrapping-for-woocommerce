@@ -167,22 +167,27 @@ class Tgpc_Wc_Gift_Wrap {
 		/* Checkout page */
  		if ( $gift_wrapper_enabled ) {
 
-            $checkbox_location = get_option( 'tgpc_gift_wrapper_location', 'woocommerce_after_checkout_billing_form' );
-
 			if( defined('TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY') ){
 				$checkbox_location_hook_priority = TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY;
 			}else{
 				$checkbox_location_hook_priority = 15;
 			}
 
+			if( defined('TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME') ){
+				$checkbox_location_hook_name = TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME;
+			}else{
+				$checkbox_location_hook_name = get_option( 'tgpc_gift_wrapper_location', 'woocommerce_after_checkout_billing_form' );
+			}
+
 			/**
-			 * If you need to alter the hook and/or the priority hook by code, you need to use filter
-			 * pre_option_tgpc_gift_wrapper_location & to define the integer constant
-			 * TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY in the wp-config.php
+			 * If you need to alter the hook and/or the priority hook by code, you need to
+			 * define a string and/or an integer constant in the wp-config.php
 			 *
-			 * Ex: define( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY', 12 );
+			 * Example:
+			 * define( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME', 'new_hook_name' );
+			 * define( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY', 12 );
 			 */
-            $this->loader->add_action( $checkbox_location, $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', $checkbox_location_hook_priority );
+            $this->loader->add_action( $checkbox_location_hook_name, $plugin_public, 'tgpc_add_gift_checkbox_on_checkout', $checkbox_location_hook_priority );
 
 			$this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee' );
 			$this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_wrapper_option_to_order_meta' );
