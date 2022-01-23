@@ -84,7 +84,7 @@ Try setting a vertical align property to the icon to align it correctly:
  If you want to use some other hook, read below.
 
  = Can I set different gift wrapper checkbox position, instead of these in dropdown in the plugin settings? =
- Yes, you need to define the hook that prints the input. And maybe the hook location.
+ Yes, you need to define the hook that prints the input. And maybe the hook's priority.
 
  - To change the hook add this line to your wp-config.php:
  `define( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME', 'new_hook_name' );`
