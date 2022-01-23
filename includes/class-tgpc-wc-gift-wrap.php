@@ -167,15 +167,15 @@ class Tgpc_Wc_Gift_Wrap {
 		/* Checkout page */
  		if ( $gift_wrapper_enabled ) {
 
-			if( defined('TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY') ){
+			if ( defined( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY' ) ) {
 				$checkbox_location_hook_priority = TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_PRIORITY;
-			}else{
+			} else {
 				$checkbox_location_hook_priority = 15;
 			}
 
-			if( defined('TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME') ){
+			if ( defined( 'TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME' ) ) {
 				$checkbox_location_hook_name = TGPC_GIFT_WRAPPER_CHECKOUT_CHECKBOX_LOCATION_HOOK_NAME;
-			}else{
+			} else {
 				$checkbox_location_hook_name = get_option( 'tgpc_gift_wrapper_location', 'woocommerce_after_checkout_billing_form' );
 			}
 
@@ -192,13 +192,11 @@ class Tgpc_Wc_Gift_Wrap {
 			$this->loader->add_action( 'woocommerce_cart_calculate_fees', $plugin_public, 'tgpc_add_gift_wrapper_fee' );
 			$this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'tgpc_save_gift_wrapper_option_to_order_meta' );
 
-			$this->loader->add_action( 'woocommerce_order_get_items', $plugin_public, 'tgpc_show_fee_even_if_gift_wrapper_cost_is_0', 10, 3 );
-
-            add_filter( 'woocommerce_get_order_item_totals_excl_free_fees', '__return_false' );
-
 //            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 //            $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		}
+
+        $this->loader->add_action( 'woocommerce_order_get_items', $plugin_public, 'tgpc_show_fee_even_if_gift_wrapper_cost_is_0', 10, 3 );
 	}
 
 	/**
