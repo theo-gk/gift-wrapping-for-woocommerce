@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Gift Wrapper for WooCommerce
+ * Plugin Name:       Gift Wrapping for WooCommerce
  * Description:       Allow customers to select a gift wrapper for their order.
  * Version:           1.0
  * Stable tag:        1.0
@@ -24,12 +24,12 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Currently plugin version.
+ * Plugin's constants.
  */
 define( 'TGPC_WC_GIFT_WRAP_VERSION', '1.0' );
-define ('TGPC_WC_GIFT_WRAP_PLUGIN_FILE', __FILE__);
-define( 'TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL', plugin_dir_url( __file__ ));
-define( 'TGPC_WC_GIFT_WRAP_PLUGIN_DIR', dirname(__FILE__) . '' );
+define( 'TGPC_WC_GIFT_WRAP_PLUGIN_FILE', __FILE__);
+define( 'TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL', plugin_dir_url( __file__ ) );
+define( 'TGPC_WC_GIFT_WRAP_PLUGIN_DIR', dirname( __FILE__ ) . '' );
 define( 'TGPC_WC_GIFT_WRAP_BASE_FILE', 'tgpc-wc-gift-wrap/tgpc-wc-gift-wrap.php' );
 define( 'TGPC_WC_GIFT_WRAP_SLUG', 'tgpc-wc-gift-wrap' );
 
