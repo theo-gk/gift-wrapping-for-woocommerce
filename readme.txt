@@ -13,15 +13,15 @@ WC tested up to: 6.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Allow customers to select a gift wrapper for their order.
+Allow customers to select a gift wrapper for their orders.
 
 == Description ==
 
 This plugin allows customers to select a gift wrapper for their orders, via a checkbox in the checkout page.
 
-With focus on performance and flexibility, this lightweight plugin that adds the gift wrapper cost, using the WooCommerce Fees API.
+With focus on performance and flexibility, this lightweight plugin adds the gift wrapper cost, using the WooCommerce Fees API.
 
-Through simple and straight-forwawrd settings, you can set a cost for the gift wrapper or offer it for free, select the tax class, or change the checkbox position on the checkout.
+Through simple and straight-forward settings, you can set a cost for the gift wrapper or offer it for free, select the tax class, or change the checkbox position on the checkout.
 
 = Full features list (free version) =
 
