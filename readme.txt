@@ -1,7 +1,7 @@
-=== Gift Wrapper for WooCommerce ===
+=== Gift Wrapping for WooCommerce ===
 Contributors: pexlechris, theogk
-Plugin Name: Gift Wrapper for WooCommerce
-Tags: woocommerce, gift box, gift wrapper, wrapping, checkout, packaging
+Plugin Name: Gift Wrapping for WooCommerce
+Tags: woocommerce, gift box, gift wrapper, gift wrapping, wrapping, checkout, packaging
 Author: Pexle Chris, Theo Gkitsos
 Version: 1.0
 Stable tag: 1.0
@@ -18,6 +18,8 @@ Allow customers to select a gift wrapper for their order.
 == Description ==
 
 This plugin allows customers to select a gift wrapper for their orders, via a checkbox in the checkout page.
+
+With focus on performance and flexibility, this lightweight plugin that adds the gift wrapper cost, using the WooCommerce Fees API.
 
 Through simple and straight-forwawrd settings, you can set a cost for the gift wrapper or offer it for free, select the tax class, or change the checkbox position on the checkout.
 
