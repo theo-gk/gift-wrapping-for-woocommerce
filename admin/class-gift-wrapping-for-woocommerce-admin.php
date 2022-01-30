@@ -49,7 +49,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
      *
 	 */
     function tgpc_wc_gift_wrap_add_settings_tab( $settings ) {
-        $settings[] = include TGPC_WC_GIFT_WRAP_PLUGIN_DIR . '/admin/class-tgpc-wc-gift-wrap-settings.php';
+        $settings[] = include GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_DIR . '/admin/class-gift-wrapping-for-woocommerce-settings.php';
         return $settings;
     }
 
@@ -134,11 +134,11 @@ class Tgpc_Wc_Gift_Wrap_Admin {
      */
     function tgpc_wc_gift_wrap_action_links( $actions, $plugin_file ) {
 
-        $this_plugin = TGPC_WC_GIFT_WRAP_BASE_FILE;
+        $this_plugin = GIFT_WRAPPING_FOR_WOOCOMMERCE_BASE_FILE;
 
         if ( $plugin_file == $this_plugin ) {
 
-            $settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=wc-settings&tab=tgpc_wc_gift_wrap' ) ) . '">' . esc_html__( 'Settings', 'tgpc-wc-gift-wrap' ) . '</a>';
+            $settings_link = '<a href="' . esc_url( get_admin_url( null, 'admin.php?page=wc-settings&tab=tgpc_wc_gift_wrap' ) ) . '">' . esc_html__( 'Settings', 'gift-wrapping-for-woocommerce' ) . '</a>';
             array_unshift( $actions, $settings_link );
         }
 
@@ -157,7 +157,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
         $screen = get_current_screen();
 
         if ( ( isset( $screen->id ) && 'shop_order' === $screen->id ) || ( 'woocommerce_page_wc-settings' === $hook && isset( $_GET['tab'] ) && ( 'tgpc_wc_gift_wrap' === $_GET['tab'] ) ) ) {
-//            wp_enqueue_style( 'tgpc-wc-gift-wrap-admin-css', plugin_dir_url( __FILE__ ) . 'css/tgpc-wc-gift-wrap-admin-css.css', array(), $this->version.time() );
+//            wp_enqueue_style( 'gift-wrapping-for-woocommerce-admin-css', plugin_dir_url( __FILE__ ) . 'css/gift-wrapping-for-woocommerce-admin-css.css', array(), $this->version.time() );
         }
 
 	}
@@ -171,7 +171,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	public function enqueue_scripts( $hook ) {
 
         if ( 'woocommerce_page_wc-settings' === $hook && isset( $_GET['tab'] ) && ( 'tgpc_wc_gift_wrap' === $_GET['tab'] ) ) {
-//            wp_enqueue_script( 'tgpc-wc-gift-wrap-admin-js', TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL . 'admin/js/tgpc-wc-gift-wrap-admin-js.js', array( 'jquery' ), $this->version.time(), true );
+//            wp_enqueue_script( 'gift-wrapping-for-woocommerce-admin-js', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_DIR_URL . 'admin/js/gift-wrapping-for-woocommerce-admin-js.js', array( 'jquery' ), $this->version.time(), true );
 		}
 	}
 }

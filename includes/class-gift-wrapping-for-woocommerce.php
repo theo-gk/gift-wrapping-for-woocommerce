@@ -51,12 +51,12 @@ class Tgpc_Wc_Gift_Wrap {
 	 * @since    1.0
 	 */
 	public function __construct() {
-		if ( defined( 'TGPC_WC_GIFT_WRAP_VERSION' ) ) {
-			$this->version = TGPC_WC_GIFT_WRAP_VERSION;
+		if ( defined( 'GIFT_WRAPPING_FOR_WOOCOMMERCE_VERSION' ) ) {
+			$this->version = GIFT_WRAPPING_FOR_WOOCOMMERCE_VERSION;
 		} else {
 			$this->version = '1.0';
 		}
-		$this->plugin_name = 'tgpc-wc-gift-wrap';
+		$this->plugin_name = 'gift-wrapping-for-woocommerce';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -86,24 +86,24 @@ class Tgpc_Wc_Gift_Wrap {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tgpc-wc-gift-wrap-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-gift-wrapping-for-woocommerce-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-tgpc-wc-gift-wrap-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-gift-wrapping-for-woocommerce-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-tgpc-wc-gift-wrap-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-gift-wrapping-for-woocommerce-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-tgpc-wc-gift-wrap-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-gift-wrapping-for-woocommerce-public.php';
 
 		$this->loader = new Tgpc_Wc_Gift_Wrap_Loader();
 	}

@@ -20,7 +20,7 @@ class Tgpc_Wc_Gift_Wrap_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'tgpc-wc-gift-wrap',
+			'gift-wrapping-for-woocommerce',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
