@@ -98,7 +98,7 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		 */
 		$label_icon = apply_filters( 'tgpc_wc_gift_wrapper_icon_html', $label_icon, $img_class, $width, $height, $inline_style );
 
-		$label_text = esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' );
+		$label_text = esc_html__( 'Gift wrapper', 'gift-wrapping-for-woocommerce' );
 
 		$label = $label_icon . '<span class="tgpc-enable-checkout-gift-wrapper--label_text">' . $label_text . '</span>';
 
@@ -146,7 +146,7 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		if ( !empty( $post_data[ 'tgpc_enable_checkout_gift_wrapper' ] )
 			|| !empty( $_POST[ 'tgpc_enable_checkout_gift_wrapper' ] ) ) {
 
-			$fee_name   = esc_html__( 'Gift wrapper', 'tgpc-wc-gift-wrap' );
+			$fee_name   = esc_html__( 'Gift wrapper', 'gift-wrapping-for-woocommerce' );
 			$fee_cost   = (float) get_option( 'tgpc_gift_wrapper_cost', 0 );
 			$is_taxable = 'yes' === get_option( 'tgpc_gift_wrapper_cost_tax_status' );
 			$tax_class  = get_option( 'tgpc_gift_wrapper_tax_class', '' );
@@ -227,7 +227,7 @@ class Tgpc_Wc_Gift_Wrap_Public {
      */
     public function enqueue_styles() {
 
-//		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/tgpc-wc-gift-wrap-public.css', array(), $this->version .time() );
+//		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/gift-wrapping-for-woocommerce-public.css', array(), $this->version .time() );
 
     }
 
@@ -244,9 +244,9 @@ class Tgpc_Wc_Gift_Wrap_Public {
 //                'xzy' => '',
 //            ];
 //
-//            wp_register_script( 'tgpc-wc-gift-wrap-checkout', plugin_dir_url(__FILE__) . 'js/tgpc-wc-gift-wrap-public.js', array('jquery'), $this->version . time(), true );
-//            wp_localize_script( 'tgpc-wc-gift-wrap-checkout', 'script_data', $script_data );
-//            wp_enqueue_script( 'tgpc-wc-gift-wrap-checkout' );
+//            wp_register_script( 'gift-wrapping-for-woocommerce-checkout', plugin_dir_url(__FILE__) . 'js/gift-wrapping-for-woocommerce-public.js', array('jquery'), $this->version . time(), true );
+//            wp_localize_script( 'gift-wrapping-for-woocommerce-checkout', 'script_data', $script_data );
+//            wp_enqueue_script( 'gift-wrapping-for-woocommerce-checkout' );
 //        }
 
     }

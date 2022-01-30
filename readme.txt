@@ -99,8 +99,8 @@ Try setting a vertical align property to the icon to align it correctly:
 
 == Installation ==
 
-1. Download the plugin from [Official WP Plugin Repository](https://wordpress.org/plugins/tgpc-wc-gift-wrap/).
-2. Upload Plugin from your WP Dashboard ( Plugins>Add New>Upload Plugin ) the tgpc-wc-gift-wrap.zip file.
+1. Download the plugin from [Official WP Plugin Repository](https://wordpress.org/plugins/gift-wrapping-for-woocommerce/).
+2. Upload Plugin from your WP Dashboard ( Plugins>Add New>Upload Plugin ) the gift-wrapping-for-woocommerce.zip file.
 3. Activate the plugin through the 'Plugins' menu in WordPress Dashboard.
 4. Go to Woocommerce > Settings > Gift Wrapper, enable and setup the Gift Wrapper.
 
