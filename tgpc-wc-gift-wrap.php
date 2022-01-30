@@ -30,7 +30,7 @@ define( 'TGPC_WC_GIFT_WRAP_VERSION', '1.0' );
 define( 'TGPC_WC_GIFT_WRAP_PLUGIN_FILE', __FILE__);
 define( 'TGPC_WC_GIFT_WRAP_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'TGPC_WC_GIFT_WRAP_PLUGIN_DIR', dirname( __FILE__ ) . '' );
-define( 'TGPC_WC_GIFT_WRAP_BASE_FILE', 'tgpc-wc-gift-wrap/tgpc-wc-gift-wrap.php' );
+define( 'TGPC_WC_GIFT_WRAP_BASE_FILE', 'gift-wrapping-for-woocommerce/tgpc-wc-gift-wrap.php' );
 define( 'TGPC_WC_GIFT_WRAP_SLUG', 'tgpc-wc-gift-wrap' );
 
 /**
