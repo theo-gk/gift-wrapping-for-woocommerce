@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gift Wrapper for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-18 23:19+0000\n"
+"POT-Creation-Date: 2022-11-25 17:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Loco-Version: 2.5.5; wp-5.8.2\n"
 "X-Domain: gift-wrapping-for-woocommerce"
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:99
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:107
 msgid "After billing details"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:102
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:110
 msgid "After order notes"
 msgstr ""
 
@@ -28,47 +28,51 @@ msgstr ""
 msgid "Allow customers to select a gift wrapper for their order."
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:98
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:106
 msgid "Before billing details"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:96
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:104
 msgid "Before customer details"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:101
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:109
 msgid "Before order notes"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:104
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:112
 msgid "Before payments"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:105
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:113
 msgid "Before place order button"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:79
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:87
 msgid "Check if the gift wrapper cost is taxable."
 msgstr ""
 
 #: admin/class-gift-wrapping-for-woocommerce-settings.php:67
+msgid "Checkbox label"
+msgstr ""
+
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:75
 msgid "Cost"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:78
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:86
 msgid "Cost is taxable"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:84
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:92
 msgid "Cost tax class"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:76
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:84
 msgid "Cost tax status"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:59
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:59 
 #: admin/class-gift-wrapping-for-woocommerce-settings.php:61
 msgid "Enable gift wrapper"
 msgstr ""
@@ -85,20 +89,22 @@ msgstr ""
 msgid "Gift Wrapper"
 msgstr ""
 
-#: public/class-gift-wrapping-for-woocommerce-public.php:101
-#: public/class-gift-wrapping-for-woocommerce-public.php:153
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:70 
+#: public/class-gift-wrapping-for-woocommerce-public.php:101 
+#: public/class-gift-wrapping-for-woocommerce-public.php:102 
+#: public/class-gift-wrapping-for-woocommerce-public.php:150
 msgid "Gift wrapper"
-msgstr ""
-
-#. Name of the plugin
-msgid "Gift Wrapper for WooCommerce"
 msgstr ""
 
 #: admin/class-gift-wrapping-for-woocommerce-settings.php:52
 msgid "Gift wrapper settings"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:92
+#. Name of the plugin
+msgid "Gift Wrapping for WooCommerce"
+msgstr ""
+
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:100
 msgid "Location on checkout"
 msgstr ""
 
@@ -106,11 +112,11 @@ msgstr ""
 msgid "Pexle Chris, Theo Gkitsos"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:107
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:115
 msgid "Select the position to appear in the checkout page."
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:87
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:95
 msgid "Select the tax class for gift wrapper cost, if cost is taxable."
 msgstr ""
 
@@ -118,7 +124,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: admin/class-gift-wrapping-for-woocommerce-settings.php:71
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:69
+msgid "The checkbox label on the checkout page."
+msgstr ""
+
+#: admin/class-gift-wrapping-for-woocommerce-settings.php:79
 msgid ""
 "The gift wrapper cost. If taxable, this amount is before taxes. Set number "
 "to zero (0) for free gift wrapper."

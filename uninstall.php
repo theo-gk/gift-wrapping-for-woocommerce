@@ -11,6 +11,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 delete_option( 'tgpc_gift_wrapper_enabled' );
+delete_option( 'tgpc_gift_wrapper_checkbox_label' );
 delete_option( 'tgpc_gift_wrapper_cost' );
 delete_option( 'tgpc_gift_wrapper_cost_tax_status' );
 delete_option( 'tgpc_gift_wrapper_tax_class' );

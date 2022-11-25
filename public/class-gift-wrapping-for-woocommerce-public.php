@@ -98,7 +98,7 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		 */
 		$label_icon = apply_filters( 'tgpc_wc_gift_wrapper_icon_html', $label_icon, $img_class, $width, $height, $inline_style );
 
-		$label_text = esc_html__( 'Gift wrapper', 'gift-wrapping-for-woocommerce' );
+		$label_text = esc_html( get_option( 'tgpc_gift_wrapper_checkbox_label', __( 'Gift wrapper', 'gift-wrapping-for-woocommerce' ) ) );
 
 		$label = $label_icon . '<span class="tgpc-enable-checkout-gift-wrapper--label_text">' . $label_text . '</span>';
 

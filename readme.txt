@@ -3,13 +3,13 @@ Contributors: pexlechris, theogk
 Plugin Name: Gift Wrapping for WooCommerce
 Tags: woocommerce, gift box, gift wrapper, gift wrapping, wrapping, checkout, packaging
 Author: Pexle Chris, Theo Gkitsos
-Version: 1.0
-Stable tag: 1.0
+Version: 1.1
+Stable tag: 1.1
 Requires at least: 5.3
-Tested up to: 6.0
+Tested up to: 6.1.1
 Requires PHP: 5.6
 WC requires at least: 5.5.0
-WC tested up to: 6.5.1
+WC tested up to: 7.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,7 +32,7 @@ Through simple and straight-forward settings, you can set a cost for the gift wr
 - Store managers can easily identify which orders have a gift wrapper selected through a small icon in the order list. Also, gift wrapper full info and cost appear in the order page, at the order items section.
 - Customer's checkbox selection is saved on WooCommerce customer session, so it doesn't get lost on page refresh.
 - Developer friendly, as you can customize pretty much everything via plugin's settings and carefully placed filters. See FAQ below for more info.
-- Translation ready.
+- Translation ready. Compatible with all plugins supporting wpml-config.xml (WPML, Polylang etc.) and TranslatePress.
 
 == Screenshots ==
 
@@ -97,6 +97,12 @@ Try setting a vertical align property to the icon to align it correctly:
  = Can I apply my own styling to the gift wrapper checkbox? =
  Yes, you can write your own CSS to style it as you like. There are appropriate classes in all the right places, so you can apply your CSS wherever you need to.
 
+  = Can I translate this plugin to any language? =
+  Yes. All strings in this plugin use the gettext functions, plus an always updated .pot template file is included. This means that they can be translated to any language using a translation plugin like WPML, Polylang, Loco Translate etc.
+
+  For texts like the checkout checkbox label which is user defined in plugin's settings, translation is also supported for all plugins that support the wpml-config.xml protocol like WPML, Polylang etc., and also TranslatePress.
+  For example, if you use WPML, use "String Translation" and search for (a) "admin_texts_tgpc_gift_wrapper_checkbox_label" domain, or (b) "tgpc_gift_wrapper_checkbox_label" option name, or (c) simply your own text you inserted in the admin field.
+
 == Installation ==
 
 1. Download the plugin from [Official WP Plugin Repository](https://wordpress.org/plugins/gift-wrapping-for-woocommerce/).
@@ -106,5 +112,11 @@ Try setting a vertical align property to the icon to align it correctly:
 
 == Changelog ==
 
+= 1.1 =
+* Add option to change checkbox label on checkout.
+* Added multilingual support.
+* Checked WP & WC compatibility.
+* Updated .pot file.
+
  = 1.0 =
-* Initial release
+* Initial release.
