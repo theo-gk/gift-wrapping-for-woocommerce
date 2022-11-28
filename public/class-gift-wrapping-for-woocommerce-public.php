@@ -48,15 +48,17 @@ class Tgpc_Wc_Gift_Wrap_Public {
      *
      * @param $checkout WC_Checkout
      * @since    1.0
+     * @since    1.1 Remove input for virtual orders
      */
 	public function tgpc_add_gift_checkbox_on_checkout( $checkout ) {
 
+		$cart = WC()->cart;
+		if ( ! is_a( $cart, 'WC_Cart' ) || ! $cart->needs_shipping() ) return;
+
 		$inline_style  = 'display: inline-block; margin-right: 4px;';
-		$width = '17px';
-		$height = '17px';
-		$img_class = 'tgpc-enable-checkout-gift-wrapper--label_icon';
-
-
+		$width         = '17px';
+		$height        = '17px';
+		$img_class     = 'tgpc-enable-checkout-gift-wrapper--label_icon';
 		$gift_icon_url = '';
 
 		/**
