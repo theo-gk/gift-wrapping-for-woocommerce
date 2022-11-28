@@ -60,13 +60,11 @@ class Tgpc_Wc_Gift_Wrap_Admin {
      * @param string $column The Column ID.
      * @since 1.0
      */
-    function dc_add_gift_icon_to_order_notes_column( $column ) {
-
-        global $the_order;
+    function dc_add_gift_icon_to_order_notes_column( $column, $order ) {
 
         if ( 'order_number' === $column ) {
 
-            if ( $the_order->meta_exists( '_tgpc_gift_wrapper' ) ) {
+            if ( $order->meta_exists( '_tgpc_gift_wrapper' ) ) {
 
 				$inline_style  = 'display: inline-block; vertical-align: text-bottom; margin-left: 4px;';
 				$width = '17px';
@@ -123,6 +121,13 @@ class Tgpc_Wc_Gift_Wrap_Admin {
         }
     }
 
+	function dc_add_gift_icon_to_order_notes_column_before_hpos( $column ){
+
+		global $the_order;
+		$order = $the_order;
+
+		$this->dc_add_gift_icon_to_order_notes_column( $column, $order );
+	}
 
     /**
      * Add Settings link in plugin page.
@@ -145,6 +150,19 @@ class Tgpc_Wc_Gift_Wrap_Admin {
         return $actions;
     }
 
+	/**
+	 * Declare compatibility with wc custom order tables
+	 *
+	 * @since 1.1
+	 *
+	 * @return void
+	 */
+	function declare_compatibility_with_wc_custom_order_tables() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE, true );
+		}
+	}
+
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -156,6 +174,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 
         $screen = get_current_screen();
 
+		// if implemented check compatibility with HPOS
         if ( ( isset( $screen->id ) && 'shop_order' === $screen->id ) || ( 'woocommerce_page_wc-settings' === $hook && isset( $_GET['tab'] ) && ( 'tgpc_wc_gift_wrap' === $_GET['tab'] ) ) ) {
 //            wp_enqueue_style( 'gift-wrapping-for-woocommerce-admin-css', plugin_dir_url( __FILE__ ) . 'css/gift-wrapping-for-woocommerce-admin-css.css', array(), $this->version.time() );
         }

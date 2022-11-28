@@ -3,6 +3,7 @@
  * Fired when the plugin is uninstalled.
  *
  * @since      1.0
+ * @since      1.1 tgpc_gift_wrapper_checkbox_label added
  */
 
 // If uninstall not called from WordPress, then exit.
