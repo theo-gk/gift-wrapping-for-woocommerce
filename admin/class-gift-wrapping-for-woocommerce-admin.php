@@ -145,6 +145,19 @@ class Tgpc_Wc_Gift_Wrap_Admin {
         return $actions;
     }
 
+	/**
+	 * Declare compatibility with wc custom order tables
+	 *
+	 * @since 1.1
+	 *
+	 * @return void
+	 */
+	function declare_compatibility_with_wc_custom_order_tables() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE, true );
+		}
+	}
+
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -156,6 +169,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 
         $screen = get_current_screen();
 
+		// if implemented check compatibility with HPOS
         if ( ( isset( $screen->id ) && 'shop_order' === $screen->id ) || ( 'woocommerce_page_wc-settings' === $hook && isset( $_GET['tab'] ) && ( 'tgpc_wc_gift_wrap' === $_GET['tab'] ) ) ) {
 //            wp_enqueue_style( 'gift-wrapping-for-woocommerce-admin-css', plugin_dir_url( __FILE__ ) . 'css/gift-wrapping-for-woocommerce-admin-css.css', array(), $this->version.time() );
         }

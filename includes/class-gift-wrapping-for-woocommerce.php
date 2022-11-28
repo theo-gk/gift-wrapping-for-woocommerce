@@ -144,10 +144,21 @@ class Tgpc_Wc_Gift_Wrap {
 
 		/* Order list */
         //add icon to orders with gift wrapper selected
+		//TODO add HPOS support
         $this->loader->add_action( 'manage_shop_order_posts_custom_column', $plugin_admin, 'dc_add_gift_icon_to_order_notes_column', 15 );
 
         /* Plugins list */
         $this->loader->add_filter( 'plugin_action_links', $plugin_admin, 'tgpc_wc_gift_wrap_action_links',10,2 );
+
+		/**
+		 * Declaring plugin compatibility with High-Performance Order Storage
+		 *
+		 * TODO add this hook if above hook is fixed
+		 *
+		 * @since 1.1
+		 */
+
+		$this->loader->add_action( 'before_woocommerce_init', $plugin_admin, 'declare_compatibility_with_wc_custom_order_tables' );
 
 //        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 //        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
