@@ -60,13 +60,11 @@ class Tgpc_Wc_Gift_Wrap_Admin {
      * @param string $column The Column ID.
      * @since 1.0
      */
-    function dc_add_gift_icon_to_order_notes_column( $column ) {
-
-        global $the_order;
+    function dc_add_gift_icon_to_order_notes_column( $column, $order ) {
 
         if ( 'order_number' === $column ) {
 
-            if ( $the_order->meta_exists( '_tgpc_gift_wrapper' ) ) {
+            if ( $order->meta_exists( '_tgpc_gift_wrapper' ) ) {
 
 				$inline_style  = 'display: inline-block; vertical-align: text-bottom; margin-left: 4px;';
 				$width = '17px';
@@ -123,6 +121,13 @@ class Tgpc_Wc_Gift_Wrap_Admin {
         }
     }
 
+	function dc_add_gift_icon_to_order_notes_column_before_hpos( $column ){
+
+		global $the_order;
+		$order = $the_order;
+
+		$this->dc_add_gift_icon_to_order_notes_column( $column, $order );
+	}
 
     /**
      * Add Settings link in plugin page.
