@@ -29,10 +29,12 @@ Through simple and straight-forward settings, you can set a cost for the gift wr
 - Set an extra cost if gift wrapper is selected. Of course, you can also offer it for free if you want.
 - Select if the extra cost is taxable and select its tax rate.
 - If selected, an extra fee appears on the checkout totals table, adding the gift wrapper cost to the cart total. The fee also appears on the thank you page and the admin and customer emails.
+- Customize checkout label text.
 - Store managers can easily identify which orders have a gift wrapper selected through a small icon in the order list. Also, gift wrapper full info and cost appear in the order page, at the order items section.
 - Customer's checkbox selection is saved on WooCommerce customer session, so it doesn't get lost on page refresh.
-- Developer friendly, as you can customize pretty much everything via plugin's settings and carefully placed filters. See FAQ below for more info.
 - Translation ready. Compatible with all plugins supporting wpml-config.xml (WPML, Polylang etc.) and TranslatePress.
+- High-Performance Order Storage (HPOS) compatible.
+- Developer friendly, as you can customize pretty much everything via plugin's settings and carefully placed filters. See FAQ below for more info.
 
 == Screenshots ==
 
@@ -113,10 +115,12 @@ Try setting a vertical align property to the icon to align it correctly:
 == Changelog ==
 
 = 1.1 =
-* Add option to change checkbox label on checkout.
-* Added multilingual support.
-* Checked WP & WC compatibility.
-* Updated .pot file.
+* Feature: Add option to change checkbox label on checkout.
+* Feature: Remove gift wrapping option if order has only virtual products.
+* i18n: Added multilingual support.
+* i18n: Updated .pot file.
+* Compatibility: Checked WP & WC compatibility.
+* Compatibility: Plugin made HPOS compatible!
 
  = 1.0 =
 * Initial release.
