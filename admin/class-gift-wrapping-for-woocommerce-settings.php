@@ -61,14 +61,16 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 			'type'     => 'checkbox',
 			'desc'     => esc_html__( 'Enable gift wrapper', 'gift-wrapping-for-woocommerce' ),
 			'desc_tip' => esc_html__( 'Enable gift wrapper option on the checkout page.', 'gift-wrapping-for-woocommerce' ),
+			'autoload' => false,
 		];
 
 		$settings['gift_wrapper_checkbox_label'] = [
-			'id'      => 'tgpc_gift_wrapper_checkbox_label',
-			'name'    => esc_html__( 'Checkbox label', 'gift-wrapping-for-woocommerce' ),
-			'type'    => 'text',
-			'desc'    => esc_html__( 'The checkbox label on the checkout page.', 'gift-wrapping-for-woocommerce' ),
-			'default' => esc_html__( 'Gift wrapper', 'gift-wrapping-for-woocommerce' ),
+			'id'        => 'tgpc_gift_wrapper_checkbox_label',
+			'name'      => esc_html__( 'Checkbox label', 'gift-wrapping-for-woocommerce' ),
+			'type'      => 'text',
+			'desc'      => esc_html__( 'The checkbox label on the checkout page.', 'gift-wrapping-for-woocommerce' ),
+			'default'   => esc_html__( 'Gift wrapper', 'gift-wrapping-for-woocommerce' ),
+			'autoload'  => false,
 		];
 
 		$settings['gift_wrapper_cost'] = [
@@ -78,6 +80,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 			'custom_attributes' => [ 'step' => '0.01', 'min' => '0' ],
 			'css'               => 'width:70px;',
 			'desc'              => esc_html__( 'The gift wrapper cost. If taxable, this amount is before taxes. Set number to zero (0) for free gift wrapper.', 'gift-wrapping-for-woocommerce' ),
+			'autoload'          => false,
 		];
 
 		$settings['gift_wrapper_cost_tax_status'] = [
@@ -86,6 +89,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 			'type'     => 'checkbox',
 			'desc'     => esc_html__( 'Cost is taxable', 'gift-wrapping-for-woocommerce' ),
 			'desc_tip' => esc_html__( 'Check if the gift wrapper cost is taxable.', 'gift-wrapping-for-woocommerce' ),
+			'autoload' => false,
 		];
 
 		$settings['gift_wrapper_tax_class'] = [
@@ -94,6 +98,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 			'type'      => 'select',
 			'options'   => wc_get_product_tax_class_options(),
 			'desc'      => esc_html__( 'Select the tax class for gift wrapper cost, if cost is taxable.', 'gift-wrapping-for-woocommerce' ),
+			'autoload'  => false,
 		];
 
 		$settings['gift_wrapper_location'] = [
@@ -111,6 +116,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 				'woocommerce_review_order_before_submit'  => esc_html__( 'Before place order button', 'gift-wrapping-for-woocommerce' ),
 			],
 			'desc'      => esc_html__( 'Select the position to appear in the checkout page.', 'gift-wrapping-for-woocommerce' ),
+			'autoload'  => false,
 		];
 
 		$settings['section_end'] = [
