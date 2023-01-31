@@ -100,9 +100,9 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		 */
 		$label_icon = apply_filters( 'tgpc_wc_gift_wrapper_icon_html', $label_icon, $img_class, $width, $height, $inline_style );
 
-		$label_text = esc_html( get_option( 'tgpc_gift_wrapper_checkbox_label', __( 'Gift wrapper', 'gift-wrapping-for-woocommerce' ) ) );
+		$label_text = get_option( 'tgpc_gift_wrapper_checkbox_label', __( 'Gift wrapper', 'gift-wrapping-for-woocommerce' ) );
 
-		$label = $label_icon . '<span class="tgpc-enable-checkout-gift-wrapper--label_text">' . $label_text . '</span>';
+		$label = $label_icon . '<span class="tgpc-enable-checkout-gift-wrapper--label_text">' . wp_kses_post( $label_text ) . '</span>';
 
 		/**
 		 * The checkout label filter.
@@ -120,12 +120,16 @@ class Tgpc_Wc_Gift_Wrap_Public {
 
         $checkbox_state = false === $saved_cost ? 0 : 1;
 
+		do_action( 'tgpc_wc_gift_wrapper_checkout_field_before' );
+
 		woocommerce_form_field( 'tgpc_enable_checkout_gift_wrapper', [
 			'type'          => 'checkbox',
 			'label'         => $label,
 			'required'      => false,
 			'class'         => [ 'form-row-wide', 'update_totals_on_change' ],
 		], $checkbox_state );
+
+		do_action( 'tgpc_wc_gift_wrapper_checkout_field_after' );
 	}
 
     /**
