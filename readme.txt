@@ -3,13 +3,13 @@ Contributors: pexlechris, theogk
 Plugin Name: Gift Wrapping for WooCommerce
 Tags: woocommerce, gift box, gift wrapper, gift wrapping, wrapping, checkout, packaging
 Author: Pexle Chris, Theo Gkitsos
-Version: 1.2
-Stable tag: 1.2
+Version: 1.2.1
+Stable tag: 1.2.1
 Requires at least: 5.3
-Tested up to: 6.1.1
+Tested up to: 6.3
 Requires PHP: 5.6
 WC requires at least: 5.5.0
-WC tested up to: 7.3.0
+WC tested up to: 8.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,9 @@ Try setting a vertical align property to the icon to align it correctly:
 4. Go to Woocommerce > Settings > Gift Wrapper, enable and setup the Gift Wrapper.
 
 == Changelog ==
+
+= 1.2.1 =
+* Compatibility: Tested up to WP 6.3 and WC 8.0.x.
 
 = 1.2 =
 * Feature: Add actions before and after checkout field to add custom data.
