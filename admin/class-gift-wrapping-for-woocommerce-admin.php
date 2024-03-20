@@ -158,11 +158,10 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	 * @return void
 	 */
 	function declare_compatibility_with_wc_custom_order_tables() {
-		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE, true );
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE );
 		}
 	}
-
 
 	/**
 	 * Register the stylesheets for the admin area.
