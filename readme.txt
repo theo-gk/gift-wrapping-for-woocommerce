@@ -114,6 +114,10 @@ Try setting a vertical align property to the icon to align it correctly:
 
 == Changelog ==
 
+= 1.2.2 =
+* Compatibility: Tested up to WP 6.5 and WC 8.7.x.
+* Add WordPress Playground blueprint.
+
 = 1.2.1 =
 * Compatibility: Tested up to WP 6.3 and WC 8.0.x.
 
