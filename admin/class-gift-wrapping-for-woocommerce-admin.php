@@ -151,18 +151,17 @@ class Tgpc_Wc_Gift_Wrap_Admin {
     }
 
 	/**
-	 * Declare compatibility with wc custom order tables
-	 *
-	 * @since 1.1
+	 * Declare compatibility with WooCommerce Features (HPOS, Cart & Checkout Blocks)
 	 *
 	 * @return void
+	 * @since 1.1
 	 */
-	function declare_compatibility_with_wc_custom_order_tables() {
-		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE, true );
+	function declare_compatibility_with_wc_features() {
+		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE, false );
 		}
 	}
-
 
 	/**
 	 * Register the stylesheets for the admin area.

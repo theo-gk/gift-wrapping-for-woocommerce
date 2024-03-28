@@ -116,11 +116,19 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		 */
 		$label = apply_filters( 'tgpc_wc_gift_wrapper_checkout_label', $label, $label_icon, $label_text );
 
-		$saved_cost = WC()->session->get( 'tgpc_gw_cost', false );
-
-        $checkbox_state = false === $saved_cost ? 0 : 1;
+		$saved_cost     = WC()->session->get( 'tgpc_gw_cost', false );
+		$checkbox_state = ( false === $saved_cost ) ? 0 : 1;
 
 		do_action( 'tgpc_wc_gift_wrapper_checkout_field_before' );
+
+		/**
+		 * Since WC 8.7.0, the <label> content is cleaned with `wp_kses_post`, so the default SVG icon is stripped away.
+		 * So we temporarily allow svg using the following filter.
+		 * After label is printed, we remove the filter to restore the original `wp_kses_post` functionality.
+		 *
+		 * @since 1.2.2
+		 */
+		add_filter( 'wp_kses_allowed_html', [ $this, 'add_svg_to_allowed_tags_for_label'], 10, 2);
 
 		woocommerce_form_field( 'tgpc_enable_checkout_gift_wrapper', [
 			'type'          => 'checkbox',
@@ -128,6 +136,8 @@ class Tgpc_Wc_Gift_Wrap_Public {
 			'required'      => false,
 			'class'         => [ 'form-row-wide', 'update_totals_on_change' ],
 		], $checkbox_state );
+
+		remove_filter( 'wp_kses_allowed_html', [ $this, 'add_svg_to_allowed_tags_for_label'], 10 );
 
 		do_action( 'tgpc_wc_gift_wrapper_checkout_field_after' );
 	}
@@ -225,36 +235,55 @@ class Tgpc_Wc_Gift_Wrap_Public {
 		return $fees;
 	}
 
+	/**
+	 * Stop `wp_kses_post` from stripping away SVGs.
+	 *
+	 * @param array $tags Allowed tags and attributes.
+	 * @param string $context Content context.
+	 *
+	 * @return array
+	 * @since 1.2.2
+	 */
+	function add_svg_to_allowed_tags_for_label( $tags, $context ) {
+
+		if ( 'post' !== $context ) return $tags;
+
+		$tags['svg'] = [
+			'xmlns' => [],
+			'width' => [],
+			'height' => [],
+			'style' => [],
+			'class' => [],
+			'fill' => [],
+			'viewbox' => [],
+			'viewBox' => [],
+			'role' => [],
+			'aria-hidden' => [],
+			'focusable' => [],
+			'version' => [],
+		];
+
+		$tags['path'] = [
+			'd' => [],
+			'fill' => [],
+		];
+
+		return $tags;
+	}
+
 
     /**
      * Register the stylesheets for the public-facing side of the site.
      *
      * @since    1.0
      */
-    public function enqueue_styles() {
-
-//		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/gift-wrapping-for-woocommerce-public.css', array(), $this->version .time() );
-
-    }
+    public function enqueue_styles() {}
 
     /**
      * Register the JavaScript for the public-facing side of the site.
      *
      * @since    1.0
      */
-    public function enqueue_scripts() {
-
-//        if ( is_checkout() ) {
-//
-//            $script_data = [
-//                'xzy' => '',
-//            ];
-//
-//            wp_register_script( 'gift-wrapping-for-woocommerce-checkout', plugin_dir_url(__FILE__) . 'js/gift-wrapping-for-woocommerce-public.js', array('jquery'), $this->version . time(), true );
-//            wp_localize_script( 'gift-wrapping-for-woocommerce-checkout', 'script_data', $script_data );
-//            wp_enqueue_script( 'gift-wrapping-for-woocommerce-checkout' );
-//        }
-
-    }
+    public function enqueue_scripts() {}
 
 }

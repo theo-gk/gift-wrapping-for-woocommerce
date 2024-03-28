@@ -1,0 +1,72 @@
+{
+  "landingPage": "/wp-admin/admin.php?page=wc-settings&tab=tgpc_wc_gift_wrap",
+  "preferredVersions": {
+    "php": "8.1",
+    "wp": "latest"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org\/plugins",
+        "slug": "woocommerce"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org\/plugins",
+        "slug": "gift-wrapping-for-woocommerce"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org\/plugins",
+        "slug": "code-snippets"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "wordpress.org\/themes",
+        "slug": "storefront"
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "show_on_front": "page",
+        "tgpc_gift_wrapper_enabled": "yes",
+        "woocommerce_task_list_welcome_modal_dismissed": "yes",
+        "woocommerce_currency": "EUR",
+        "woocommerce_onboarding_opt_in": "no",
+        "woocommerce_show_marketplace_suggestions": "no",
+        "woocommerce_allow_tracking": "no",
+        "woocommerce_task_list_reminder_bar_hidden": "yes",
+        "woocommerce_analytics_enabled" : "no"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include '/wordpress/wp-load.php'; update_option('woocommerce_onboarding_profile', array('skipped'=>true)); update_option('page_on_front', get_option('woocommerce_shop_page_id')); wp_update_post(array('ID'=>get_option('woocommerce_checkout_page_id'),'post_content'=>'<!-- wp:woocommerce/classic-shortcode {\"shortcode\":\"checkout\"} /-->')); wp_update_post(array('ID'=>get_option('woocommerce_cart_page_id'),'post_content'=>'<!-- wp:woocommerce/classic-shortcode /-->')); $product = new WC_Product_Simple(); $product->set_name('The One Ring'); $product->set_regular_price(23.11); $product->save(); $new_zone_shipping = new WC_Shipping_Zone(); $new_zone_shipping->set_zone_name('Entire galaxy'); $instance_id = $new_zone_shipping->add_shipping_method('free_shipping'); $new_zone_shipping->save();"
+    }
+  ]
+}
