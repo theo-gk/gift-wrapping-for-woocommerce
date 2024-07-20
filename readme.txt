@@ -1,15 +1,15 @@
 === Gift Wrapping for WooCommerce ===
 Contributors: pexlechris, theogk
 Plugin Name: Gift Wrapping for WooCommerce
-Tags: woocommerce, gift box, gift wrapper, gift wrapping, wrapping, checkout, packaging
+Tags: woocommerce, gift box, gift wrapper, gift wrapping, wrapping
 Author: Pexle Chris, Theo Gkitsos
 Version: 1.2.2
 Stable tag: 1.2.2
 Requires at least: 5.3
-Tested up to: 6.5
+Tested up to: 6.6.1
 Requires PHP: 5.6
 WC requires at least: 5.5.0
-WC tested up to: 8.7.0
+WC tested up to: 9.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
