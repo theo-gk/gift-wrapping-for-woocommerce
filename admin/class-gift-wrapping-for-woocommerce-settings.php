@@ -77,8 +77,8 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 			'id'                => 'tgpc_gift_wrapper_cost',
 			'name'              => esc_html__( 'Cost', 'gift-wrapping-for-woocommerce' ),
 			'type'              => 'number',
-			'custom_attributes' => [ 'step' => '0.01', 'min' => '0' ],
-			'css'               => 'width:70px;',
+			'custom_attributes' => [ 'step' => '0.001', 'min' => '0' ],
+			'css'               => 'width:74px;',
 			'desc'              => esc_html__( 'The gift wrapper cost. If taxable, this amount is before taxes. Set number to zero (0) for free gift wrapper.', 'gift-wrapping-for-woocommerce' ),
 			'autoload'          => false,
 		];

@@ -3,13 +3,13 @@ Contributors: pexlechris, theogk
 Plugin Name: Gift Wrapping for WooCommerce
 Tags: woocommerce, gift box, gift wrapper, gift wrapping, wrapping
 Author: Pexle Chris, Theo Gkitsos
-Version: 1.2.2
-Stable tag: 1.2.2
+Version: 1.2.3
+Stable tag: 1.2.3
 Requires at least: 5.3
 Tested up to: 6.6.1
 Requires PHP: 5.6
 WC requires at least: 5.5.0
-WC tested up to: 9.1.2
+WC tested up to: 9.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,16 +49,18 @@ Through simple and straight-forward settings, you can set a cost for the gift wr
  = Can I offer gift wrapper for free? =
  Yes, just set the gift wrapper cost to zero (0).
 
- = Is there any hook that allow me to change the cost on the fly? =
- Yes, you can do this, using the Options API.
+ = Can I modify the gift wrapper cost on the fly? =
+ Yes, you can do this using the `tgpc_wc_gift_wrapper_cost` filter.
+ Simple example:
  `
- add_filter('pre_option_tgpc_gift_wrapper_cost', function($cost){
+ add_filter('tgpc_wc_gift_wrapper_cost', function($cost){
     //Do magic here
     return $cost;
  });
  `
+ You should add this code in your child theme's functions.php file or a Code Snippets plugin.
 
- = Can I change the icon? =
+ = Can I change the icon on the checkout? =
  Yes, you can use the filter `tgpc_wc_gift_wrapper_icon_url` in order to return the public url of the image you want
  OR
  the filter `tgpc_wc_gift_wrapper_icon_html` in order to filter the printed html of the icon.
@@ -105,6 +107,10 @@ Try setting a vertical align property to the icon to align it correctly:
   For texts like the checkout checkbox label which is user defined in plugin's settings, translation is also supported for all plugins that support the wpml-config.xml protocol like WPML, Polylang etc., and also TranslatePress.
   For example, if you use WPML, use "String Translation" and search for (a) "admin_texts_tgpc_gift_wrapper_checkbox_label" domain, or (b) "tgpc_gift_wrapper_checkbox_label" option name, or (c) simply your own text you inserted in the admin field.
 
+ = Is this plugin compatible with multi-currency plugins? =
+ Yes, but not out of the box, you have to add some code yourself. You have to use the filter `tgpc_wc_gift_wrapper_cost` and modify the gift wrapper cost depending on the selected currency.
+ You can find some examples in the [support forum](https://wordpress.org/support/plugin/gift-wrapping-for-woocommerce/).
+
 == Installation ==
 
 1. Download the plugin from [Official WP Plugin Repository](https://wordpress.org/plugins/gift-wrapping-for-woocommerce/).
@@ -113,6 +119,10 @@ Try setting a vertical align property to the icon to align it correctly:
 4. Go to Woocommerce > Settings > Gift Wrapper, enable and setup the Gift Wrapper.
 
 == Changelog ==
+
+= 1.2.3 =
+* Compatibility: Tested up to WP 6.6.x and WC 9.2.x
+* Add a new filter `tgpc_wc_gift_wrapper_cost` to modify the gift wrapper cost on the fly.
 
 = 1.2.2 =
 * Compatibility: Tested up to WP 6.5 and WC 8.7.x.

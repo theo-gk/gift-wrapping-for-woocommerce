@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       Gift Wrapping for WooCommerce
  * Description:       Allow customers to select a gift wrapper for their order.
- * Version:           1.2.2
- * Stable tag:        1.2.2
+ * Version:           1.2.3
+ * Stable tag:        1.2.3
  * Author:            Pexle Chris, Theo Gkitsos
  * Text Domain:       gift-wrapping-for-woocommerce
  * Domain Path:       /languages
@@ -12,7 +12,7 @@
  * Tested up to: 6.6.1
  * Requires PHP: 5.6
  * WC requires at least: 5.5.0
- * WC tested up to: 9.1.2
+ * WC tested up to: 9.2.2
  *
  * License:           GPLv2 or later
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Plugin's constants.
  */
-define( 'GIFT_WRAPPING_FOR_WOOCOMMERCE_VERSION', '1.2.2' );
+define( 'GIFT_WRAPPING_FOR_WOOCOMMERCE_VERSION', '1.2.3' );
 define( 'GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE', __FILE__);
 define( 'GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_DIR', dirname( __FILE__ ) );
