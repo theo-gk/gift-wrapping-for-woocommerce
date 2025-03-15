@@ -1,6 +1,6 @@
 <?php
 /**
- * The plugin settings inside WooCommerce settings.
+ * The plugin settings inside WooCommerce settings page.
  *
  * @package    Tgpc_Wc_Gift_Wrap
  * @subpackage Tgpc_Wc_Gift_Wrap/admin
@@ -35,7 +35,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 	 *
 	 * @return array
 	 */
-	protected function get_own_sections() {
+	protected function get_own_sections(): array {
 		return [
 			'' => __( 'General Settings', 'gift-wrapping-for-woocommerce' ),
 		];
@@ -46,7 +46,7 @@ class Tgpc_Gift_Wrap_Wc_Settings extends WC_Settings_Page {
 	 *
 	 * @return array
 	 */
-	protected function get_settings_for_default_section() {
+	protected function get_settings_for_default_section(): array {
 
 		$settings['section_title'] = [
 			'id'   => 'tgpc_gift_wrapper_main_settings',
