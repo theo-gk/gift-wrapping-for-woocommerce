@@ -62,6 +62,7 @@ class Tgpc_Wc_Gift_Wrap {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_block_hooks();
 	}
 
 	/**
@@ -104,6 +105,8 @@ class Tgpc_Wc_Gift_Wrap {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-gift-wrapping-for-woocommerce-public.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'blocks/gift-wrapping-checkout-block/class-gift-wrapping-checkout-block.php';
 
 		$this->loader = new Tgpc_Wc_Gift_Wrap_Loader();
 	}
@@ -210,10 +213,15 @@ class Tgpc_Wc_Gift_Wrap {
         $this->loader->add_action( 'woocommerce_order_get_items', $plugin_public, 'tgpc_show_fee_even_if_gift_wrapper_cost_is_0', 10, 3 );
 	}
 
+	private function define_block_hooks() {
+		$block_class = new Tgpc_Gift_Wrapping_Checkout_Block( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'woocommerce_blocks_loaded', $block_class, 'register_checkout_block' );
+
+	}
+
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
-	 *
-	 * @since    1.0
 	 */
 	public function run() {
 		$this->loader->run();

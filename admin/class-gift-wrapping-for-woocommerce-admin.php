@@ -162,7 +162,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	function declare_compatibility_with_wc_features(): void {
 		if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE );
-			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE, false ); // todo
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', GIFT_WRAPPING_FOR_WOOCOMMERCE_PLUGIN_FILE ); // todo
 		}
 	}
 
