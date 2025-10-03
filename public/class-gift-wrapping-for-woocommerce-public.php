@@ -170,9 +170,9 @@ class Tgpc_Wc_Gift_Wrap_Public {
 	/**
 	 * Save checkbox value to order data.
 	 *
-	 * @param WC_Order $order The order object.
+	 * @param WC_Abstract_Order $order The order object.
 	 */
-	public function tgpc_save_gift_wrapper_option_to_order_meta( WC_Order $order ): void {
+	public function tgpc_save_gift_wrapper_option_to_order_meta( $order ): void {
 
 		if ( ! empty( $_POST['tgpc_enable_checkout_gift_wrapper'] ) ) {
 			$cost = WC()->session->get( 'tgpc_gw_cost' );
@@ -188,13 +188,13 @@ class Tgpc_Wc_Gift_Wrap_Public {
 	 * With this hook, we allow to display the gift wrapper fee in the emails,
 	 * using the hook `woocommerce_get_order_item_totals_excl_free_fees`.
 	 *
-	 * @param WC_Order_Item[] $items An array of items/products within this order.
-	 * @param WC_Order        $order The order object.
-	 * @param array           $types Types of line items.
+	 * @param WC_Order_Item[]   $items An array of items/products within this order.
+	 * @param WC_Abstract_Order $order The order object.
+	 * @param array             $types Types of line items.
 	 *
 	 * @return array The fees variable that isn't changed.
 	 */
-	public function tgpc_show_fee_even_if_gift_wrapper_cost_is_0( array $items, WC_Order $order, array $types ): array {
+	public function tgpc_show_fee_even_if_gift_wrapper_cost_is_0( array $items, WC_Abstract_Order $order, array $types ): array {
 
 		if ( ! in_array( 'fee', $types ) ) return $items;
 

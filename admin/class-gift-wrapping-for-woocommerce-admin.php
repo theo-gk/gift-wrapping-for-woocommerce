@@ -52,7 +52,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 	 * Adds a gift box icon in the admin order page if an order has gift wrapper selected.
 	 *
 	 * @param string   $column The Column ID.
-	 * @param WC_Order $order  The order object.
+	 * @param WC_Abstract_Order $order  The order object.
 	 */
 	function dc_add_gift_icon_to_order_notes_column( string $column, WC_Order $order ): void {
 
