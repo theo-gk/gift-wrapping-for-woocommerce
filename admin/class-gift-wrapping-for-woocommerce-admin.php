@@ -58,7 +58,7 @@ class Tgpc_Wc_Gift_Wrap_Admin {
      * Adds a gift box icon in the admin order page if an order has gift wrapper selected.
      *
      * @param string $column The Column ID.
-     * @since 1.0
+	 * @param WC_Abstract_Order $order  The order object.
      */
     function dc_add_gift_icon_to_order_notes_column( $column, $order ) {
 
@@ -121,7 +121,15 @@ class Tgpc_Wc_Gift_Wrap_Admin {
         }
     }
 
-	function dc_add_gift_icon_to_order_notes_column_before_hpos( $column ){
+	/**
+	 * Adds a gift box icon in the admin order page if an order has gift wrapper selected.
+	 * For stores without HPOS enabled.
+	 *
+	 * @param string $column The Column ID.
+	 *
+	 * @return void
+	 */
+	function dc_add_gift_icon_to_order_notes_column_before_hpos( $column ): void {
 
 		global $the_order;
 		$order = $the_order;
@@ -129,14 +137,14 @@ class Tgpc_Wc_Gift_Wrap_Admin {
 		$this->dc_add_gift_icon_to_order_notes_column( $column, $order );
 	}
 
-    /**
-     * Add Settings link in plugin page.
-     *
-     * @param   array $actions
-     * @param   string $plugin_file
-     * @return  array $actions
-     * @since   1.0
-     */
+	/**
+	 * Add Settings link in plugin page.
+	 *
+	 * @param array  $actions     The actions array.
+	 * @param string $plugin_file Path to the plugin file relative to the 'plugins' directory.
+	 *
+	 * @return array The actions array.
+	 */
     function tgpc_wc_gift_wrap_action_links( $actions, $plugin_file ) {
 
         $this_plugin = GIFT_WRAPPING_FOR_WOOCOMMERCE_BASE_FILE;

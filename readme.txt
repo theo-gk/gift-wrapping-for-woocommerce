@@ -3,13 +3,13 @@ Contributors: pexlechris, theogk
 Plugin Name: Gift Wrapping for WooCommerce
 Tags: woocommerce, gift box, gift wrapper, gift wrapping, wrapping
 Author: Pexle Chris & Theo Gkitsos
-Version: 1.2.4
-Stable tag: 1.2.4
+Version: 1.2.5
+Stable tag: 1.2.5
 Requires at least: 5.3
-Tested up to: 6.7.2
+Tested up to: 6.8.3
 Requires PHP: 5.6
 WC requires at least: 5.5.0
-WC tested up to: 9.6.2
+WC tested up to: 10.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -120,6 +120,8 @@ Try setting a vertical align property to the icon to align it correctly:
 
 == Changelog ==
 
+= 1.2.5 =
+* Compatibility: Tested up to WP 6.8.x and WC 10.2.x
 
 = 1.2.4 =
 * Compatibility: Tested up to WP 6.7.x and WC 9.6.x
